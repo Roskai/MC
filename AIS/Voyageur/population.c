@@ -294,7 +294,13 @@ void selectionMeilleursEtClonesMutes(Population *population)
     /*** Et on garde les meilleurs...                                    ***/
     /*** LES DEUX VERSIONS SONT A FAIRE ET DOIVENT ETRE COMPAREES        ***/
 
-    (void)population;
+
+    for (size_t i = 0; i < population->nbClones; i++)
+    {
+        
+       
+    }
+    
 
     /* A completer ... */
 }
