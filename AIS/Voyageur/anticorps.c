@@ -20,9 +20,9 @@ extern Carte carte; /* Un passage de parametre pas tres joli ! */
 /**********************************************************************/
 /*
 typedef struct { int    parcours[NBVILLES];
-				 double cout;
-				 int    nbVilles;
-			   }                            Ac;
+                 double cout;
+                 int    nbVilles;
+               }                            Ac;
 */
 
 /* Generation aleatoire du parcours d'un Anti-Corps */
@@ -155,46 +155,42 @@ void cloneAc(const Ac *ac, Ac *nouvelAc)
 */
 void muteAc(Ac *ac, int nbMutations)
 {
-#if METHODEMUTATION == 0 // Mutation par échange
-	int i;
-	for (i = 0; i < nbMutations; i++)
-	{
-		int entierA = myRandomMinMax(0, ac->nbVilles - 1);
-		int entierB = myRandomMinMax(0, ac->nbVilles - 1);
-		while (entierB == entierA)
-		{
-			entierB = myRandomMinMax(0, ac->nbVilles - 1);
-		}
-		int ville1 = ac->parcours[entierA];
-		ac->parcours[entierA] = ac->parcours[entierB];
-		ac->parcours[entierB] = ville1;
-	}
-#elif METHODEMUTATION == 1 // Mutation par inversion
-	int i;
-	for (i = 0; i < nbMutations; i++)
-	{
-		int entierA = myRandomMinMax(0, ac->nbVilles - 1);
-		int entierB = myRandomMinMax(0, ac->nbVilles - 1);
-		while (entierB == entierA)
-			entierB = myRandomMinMax(0, ac->nbVilles - 1);
+    #if METHODEMUTATION == 0 // Mutation par échange
+    int i;
+    for ( i = 0; i < nbMutations; i++) {
+        int entierA = myRandomMinMax(0, ac->nbVilles - 1);
+        int entierB = myRandomMinMax(0, ac->nbVilles - 1);
+        while (entierB == entierA)
+        {
+            entierB = myRandomMinMax(0, ac->nbVilles - 1);
+        }       
+        int ville1 = ac->parcours[entierA];
+        ac->parcours[entierA] = ac->parcours[entierB];
+        ac->parcours[entierB] = ville1;
+    }
+    #elif METHODEMUTATION == 1 // Mutation par inversion
+    int i;
+    for ( i = 0; i < nbMutations; i++) {
+        int entierA = myRandomMinMax(0, ac->nbVilles - 1);
+        int entierB = myRandomMinMax(0, ac->nbVilles - 1);
+        while (entierB == entierA) entierB = myRandomMinMax(0, ac->nbVilles - 1);
 
-		if (entierA > entierB)
-		{
-			int temp = entierA;
-			entierA = entierB;
-			entierB = temp;
-		}
-		for (size_t j = 0; j < (entierB - entierA) / 2; j++)
-		{
-			// TODO Inverser la séquence
-		}
-		// TODO Translater la séquence
-		int ville1 = ac->parcours[entierA];
-		ac->parcours[entierA] = ac->parcours[entierB];
-		ac->parcours[entierB] = ville1;
-	}
-#else					   // Mutation par translation
-// TODO
-#endif
-	calculCoutAc(ac);
+        if (entierA > entierB) {
+            int temp = entierA;
+            entierA = entierB;
+            entierB = temp;
+        }
+        for (size_t j = 0; j < (entierB-entierA)/2; j++)
+        {
+            // TODO Inverser la séquence
+        }
+        // TODO Translater la séquence
+        int ville1 = ac->parcours[entierA];
+        ac->parcours[entierA] = ac->parcours[entierB];
+        ac->parcours[entierB] = ville1;
+    }
+    #else // Mutation par translation
+    // TODO
+    #endif
+    calculCoutAc(ac); 
 }
