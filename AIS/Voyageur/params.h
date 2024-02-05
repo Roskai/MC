@@ -1,10 +1,10 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
-#define METHODESELECTION 1 // 0 : 2 à 2 | 1 : Tri population
-#define METHODEMUTATION 1  // 0 : Echange | 1 : Inversion | 2 Translation
+#define METHODESELECTION 0 // 0 : 2 à 2 | 1 : Tri population
+#define METHODEMUTATION 0  // 0 : Echange | 1 : Inversion | 2 Translation
 
-#define NBVILLES 100
+#define NBVILLES 30
 #define COTECARTE 10
 
 /* DANS LA SUITE, NE PAS TOUCHER:

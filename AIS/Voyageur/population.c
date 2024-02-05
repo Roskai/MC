@@ -325,8 +325,7 @@ void mutationMoinsBons(Population *population)
 /*** Les moins bons doivent etre a gauche (apres un tri par exemple) ***/
 void remplacementMauvaisParNouveaux(Population *population, int nbNouveaux)
 {
-	(void)population;
-	(void)nbNouveaux;
-
-	/* A completer ... */
+	for (size_t i=0; i<nbNouveaux; i++) {
+		genereAc(population->individus[i]);
+	}
 }

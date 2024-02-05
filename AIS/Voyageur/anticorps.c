@@ -190,7 +190,7 @@ void muteAc(Ac *ac, int nbMutations)
 			ac->parcours[entierB] = ville;
 		}
 	#else // Mutation par translation
-
+		
 	#endif
 	calculCoutAc(ac); 
 }
