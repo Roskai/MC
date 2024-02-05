@@ -290,24 +290,23 @@ void selectionMeilleursEtClonesMutes(Population *population)
 	/*** Et on garde les meilleurs...                                    ***/
 	/*** LES DEUX VERSIONS SONT A FAIRE ET DOIVENT ETRE COMPAREES        ***/
 
-#if METHODESELECTION == 0 // Selection 2 à 2
-	for (size_t i = 0; i < population->nbClones; i++)
-	{
-		Ac *ind = population->individus[population->nbIndividus - population->nbClones + i];
-		Ac *clo = population->clones[i];
-
-		if (compareAc(ind, clo) > 0)
+	#if METHODESELECTION == 0 // Selection 2 à 2
+		for (size_t i = 0; i < population->nbClones; i++)
 		{
-			population->clones[i] = ind;
-			population->individus[population->nbIndividus - population->nbClones + i] = clo;
+			Ac *ind = population->individus[population->nbIndividus - population->nbClones + i];
+			Ac *clo = population->clones[i];
+
+			if (compareAc(ind, clo) > 0)
+			{
+				population->clones[i] = ind;
+				population->individus[population->nbIndividus - population->nbClones + i] = clo;
+			}
 		}
-	}
-#else // Selection par tri ensemble
-
-	// TODO : Récupération des clones
-	triPopulation(population);
-
-#endif
+	#else // Selection par tri ensemble
+		triSousPopulation(population, // TODO Tri non fonctionnel actuellement
+			population->nbIndividus-population->nbClones,
+			2*population->nbClones);
+	#endif
 }
 
 /*** Les moins bons doivent etre a gauche (apres un tri par exemple) ***/
@@ -316,10 +315,11 @@ void mutationMoinsBons(Population *population)
 	/* Plus un mauvais est a droite, meilleur il est!                 */
 	/* On peut ainsi faire varier le nombre de mutations a effectuer. */
 	/* Dans un premier temps, le nombre de mutations peut etre fixe.  */
+	int nbMutation = 1; // TODO : Fixe pour l'instant
 
-	(void)population;
-
-	/* A completer ... */
+	for (size_t i=0; i<population->nbIndividus-population->nbClones; i++) {
+		muteAc(population->individus[i], nbMutation);
+	}
 }
 
 /*** Les moins bons doivent etre a gauche (apres un tri par exemple) ***/

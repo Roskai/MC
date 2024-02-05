@@ -283,6 +283,10 @@ int main(int argc, char **argv)
         clonageMeilleurs(&p);
         mutationClones(&p);
         selectionMeilleursEtClonesMutes(&p);
+        mutationMoinsBons(&p);
+        if (tour % nbGenerationsInjection == 0) {
+            remplacementMauvaisParNouveaux(&p, NBNOUVEAUX);
+        }
 
         /* Fin a completer !! */
 
