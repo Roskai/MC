@@ -290,31 +290,33 @@ void selectionMeilleursEtClonesMutes(Population *population)
 	/*** Et on garde les meilleurs...                                    ***/
 	/*** LES DEUX VERSIONS SONT A FAIRE ET DOIVENT ETRE COMPAREES        ***/
 
-	#if METHODESELECTION == 0 // Selection 2 à 2
-		for (size_t i = 0; i < population->nbClones; i++)
+	int deltaNbIndividusEtNbClones = population->nbIndividus - population->nbClones;
+#if METHODESELECTION == 0 // Selection 2 à 2
+	for (size_t i = 0; i < population->nbClones; i++)
+	{
+		Ac *indiv = population->individus[deltaNbIndividusEtNbClones + i];
+		Ac *clone = population->clones[i];
+
+		if (compareAc(indiv, clone) > 0)
 		{
-			Ac *ind = population->individus[population->nbIndividus - population->nbClones + i];
-			Ac *clo = population->clones[i];
-
-			if (compareAc(ind, clo) > 0)
-			{
-				population->clones[i] = ind;
-				population->individus[population->nbIndividus - population->nbClones + i] = clo;
-			}
+			population->clones[i] = indiv;
+			population->individus[deltaNbIndividusEtNbClones + i] = clone;
 		}
-	#else // Selection par tri ensemble
-		triSousPopulation(population,
-			population->nbIndividus-population->nbClones,
-			2*population->nbClones);
+	}
+#else // Selection par tri ensemble
 
-		for (size_t i=0; i<population->nbClones; i++) {
-			Ac *temp = population->individus[(population->nbIndividus-population->nbClones)+i];
-			population->individus[(population->nbIndividus-population->nbClones)+i]
-				= population->clones[i];
-			population->clones[i] = temp;
-		}
-		
-	#endif
+	triSousPopulation(population,
+					  deltaNbIndividusEtNbClones,
+					  2 * population->nbClones);
+
+	for (size_t i = 0; i < population->nbClones; i++)
+	{
+		Ac *temp = population->individus[deltaNbIndividusEtNbClones + i];
+		population->individus[deltaNbIndividusEtNbClones + i] = population->clones[i];
+		population->clones[i] = temp;
+	}
+
+#endif
 }
 
 /*** Les moins bons doivent etre a gauche (apres un tri par exemple) ***/
@@ -325,7 +327,8 @@ void mutationMoinsBons(Population *population)
 	/* Dans un premier temps, le nombre de mutations peut etre fixe.  */
 	int nbMutation = 1; // TODO : Fixe pour l'instant
 
-	for (size_t i=0; i<population->nbIndividus-population->nbClones; i++) {
+	for (size_t i = 0; i < population->nbIndividus - population->nbClones; i++)
+	{
 		muteAc(population->individus[i], nbMutation);
 	}
 }
@@ -333,7 +336,8 @@ void mutationMoinsBons(Population *population)
 /*** Les moins bons doivent etre a gauche (apres un tri par exemple) ***/
 void remplacementMauvaisParNouveaux(Population *population, int nbNouveaux)
 {
-	for (size_t i=0; i<nbNouveaux; i++) {
+	for (size_t i = 0; i < nbNouveaux; i++)
+	{
 		genereAc(population->individus[i]);
 	}
 }
