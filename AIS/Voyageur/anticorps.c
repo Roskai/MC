@@ -184,7 +184,7 @@ void muteAc(Ac *ac, int nbMutations)
         {
             // TODO Inverser la séquence
         }
-           
+        // TODO Translater la séquence
         int ville1 = ac->parcours[entierA];
         ac->parcours[entierA] = ac->parcours[entierB];
         ac->parcours[entierB] = ville1;
