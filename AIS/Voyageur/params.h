@@ -2,7 +2,7 @@
 #define PARAMS_H
 
 #define METHODESELECTION 1 // 0 : 2 à 2 | 1 : Tri population
-#define METHODEMUTATION 0  // 0 : Echange | 1 : Inversion | 2 Translation
+#define METHODEMUTATION 2  // 0 : Echange | 1 : Inversion | 2 Translation
 
 #define NBVILLES 30
 #define COTECARTE 10
