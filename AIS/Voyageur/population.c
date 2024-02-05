@@ -303,9 +303,17 @@ void selectionMeilleursEtClonesMutes(Population *population)
 			}
 		}
 	#else // Selection par tri ensemble
-		triSousPopulation(population, // TODO Tri non fonctionnel actuellement
+		triSousPopulation(population,
 			population->nbIndividus-population->nbClones,
 			2*population->nbClones);
+
+		for (size_t i=0; i<population->nbClones; i++) {
+			Ac *temp = population->individus[(population->nbIndividus-population->nbClones)+i];
+			population->individus[(population->nbIndividus-population->nbClones)+i]
+				= population->clones[i];
+			population->clones[i] = temp;
+		}
+		
 	#endif
 }
 
