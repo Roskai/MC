@@ -3,6 +3,6 @@ AIS/Voyageur/*.o
 AIS/ais30
 AIS/ais16
 AIS/ais8
-AIS/ais
+AIS/Voyageur/ais
 FuzzyLogic/
 Recuit/
