@@ -280,6 +280,7 @@ int main(int argc, char **argv)
 
         /* Par construction, en debut de boucle, la population est deja triee... */
 
+        clonageMeilleurs(&p);
         mutationClones(&p);
         selectionMeilleursEtClonesMutes(&p);
 

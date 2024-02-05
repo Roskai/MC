@@ -1,7 +1,10 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
-#define  NBVILLES    30
+#define METHODESELECTION 1 // 0 : 2 à 2 | 1 : Tri population
+#define METHODEMUTATION 1 // 0 : Echange | 1 : Inversion | 2 Translation
+
+#define  NBVILLES    100
 #define COTECARTE    10
 
 /* DANS LA SUITE, NE PAS TOUCHER:
@@ -17,6 +20,7 @@
 
 #define   NBCLONES  (N*TAILLEPOP)/100
 #define NBNOUVEAUX  (D*TAILLEPOP)/100
+
 
 /*********************************************************************/
 /************ Verification contraintes sur les defines ***************/
