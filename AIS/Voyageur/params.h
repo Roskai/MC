@@ -1,8 +1,28 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
-#define METHODESELECTION 1 // 0 : 2 à 2 | 1 : Tri population
-#define METHODEMUTATION 0  // 0 : Echange | 1 : Inversion | 2 Translation
+/**
+ * @def METHODESELECTION
+ * @brief Choix de la méthode de sélection pour l'algorithme génétique.
+ *
+ *
+ * @note Valeurs possibles :\n
+ * @note - 0 : Méthode "2 à 2" \n
+ * @note - 1 : Tri de la population (sélection des meilleurs individus)\n
+ */
+#define METHODESELECTION 1
+
+/**
+ * @def METHODEMUTATION
+ * @brief Choix de la méthode de mutation pour l'algorithme génétique.
+ *
+ *
+ * @note Valeurs possibles : \n
+ * @note - 0 : Échange de deux éléments dans l'individu \n
+ * @note - 1 : Inversion d'une portion de l'individu \n
+ * @note - 2 : Translation d'une portion de l'individu \n
+ */
+#define METHODEMUTATION 4
 
 #define NBVILLES 30
 #define COTECARTE 10
@@ -35,6 +55,15 @@
 
 #if D > 100
 #error "Attention: D trop grand"
+#endif
+
+#if METHODEMUTATION > 3 || METHODEMUTATION < 0
+#error "Choix de la méthode de mutation incorrecte"
+#error "Doit être contenut ente 0 et 3"
+#error " Valeurs possibles : "
+#error "0 : Échange de deux éléments dans l'individu "
+#error "1 : Inversion d'une portion de l'individu "
+#error "2 : Translation d'une portion de l'individu "
 #endif
 
 #define ERROR_PARAM 0

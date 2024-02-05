@@ -280,16 +280,26 @@ void mutationClones(Population *population)
 		muteAc(population->clones[i], 1);
 	}
 }
-
+/**
+ * Sélectionne les meilleurs individus et les clones mutés dans la population.
+ *
+ * Cette fonction compare chaque paire d'individus (meilleur, clone muté) et conserve
+ * le meilleur entre les deux. Il existe deux méthodes de sélection, activées par la
+ * directive METHODESELECTION.
+ *
+ * - Si METHODESELECTION est défini à 0 :
+ *   - La sélection se fait en comparant chaque paire (meilleur, clone) individuellement.
+ *   - Le meilleur individu est conservé dans le tableau des clones, et le clone dans le tableau des individus.
+ *
+ * - Si METHODESELECTION est défini à 1 :
+ *   - La population totale (individus et clones) est triée par ordre décroissant de .
+ *   - Les meilleurs individus (en haut du classement) sont conservés dans le tableau des individus.
+ *   - Les clones mutés sont placés dans le tableau des clones, en correspondance avec les meilleurs individus.
+ *
+ * @param population Pointeur vers la structure Population contenant les individus et les clones.
+ */
 void selectionMeilleursEtClonesMutes(Population *population)
 {
-	/*** Les meilleurs et les clones sont compares                       ***/
-	/*** Chaque couple (meilleur,clone) est evalue...                    ***/
-	/*** Et on garde le meilleur des deux                                ***/
-	/*** Autre possibilite: tri des meilleurs et des clones (ensemble)   ***/
-	/*** Et on garde les meilleurs...                                    ***/
-	/*** LES DEUX VERSIONS SONT A FAIRE ET DOIVENT ETRE COMPAREES        ***/
-
 	int deltaNbIndividusEtNbClones = population->nbIndividus - population->nbClones;
 #if METHODESELECTION == 0 // Selection 2 à 2
 	for (size_t i = 0; i < population->nbClones; i++)
