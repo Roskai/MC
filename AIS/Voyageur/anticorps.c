@@ -190,7 +190,36 @@ void muteAc(Ac *ac, int nbMutations)
 			ac->parcours[entierB] = ville;
 		}
 	#else // Mutation par translation
-		
+		int i;
+		for ( i = 0; i < nbMutations; i++) {
+			int entierA = myRandomMinMax(0, ac->nbVilles - 1);
+			int entierB = myRandomMinMax(0, ac->nbVilles - 1);
+			while (entierB == entierA)
+					entierB = myRandomMinMax(0, ac->nbVilles - 1);
+			int entierC = myRandomMinMax(0, ac->nbVilles - 1);
+			while (entierC == entierA || entierC == entierB)
+					entierC = myRandomMinMax(0, ac->nbVilles - 1);
+			
+			if (entierA > entierC) {
+				int temp = entierA;
+				entierA = entierC;
+				entierC = temp; }
+			if (entierA > entierB) {
+				int temp = entierA;
+				entierA = entierB;
+				entierB = temp; }
+			if (entierB > entierC) {
+				int temp = entierB;
+				entierB = entierC;
+				entierC = temp; }
+
+			for (size_t j=0; j<(entierB-entierA)/2; j++) {
+				// TODO Translate
+			}
+			int ville = ac->parcours[entierA];
+			ac->parcours[entierA] = ac->parcours[entierB];
+			ac->parcours[entierB] = ville;
+		}
 	#endif
 	calculCoutAc(ac); 
 }

@@ -289,6 +289,13 @@ void mutationClones(Population *population)
  */
 void selectionMeilleursEtClonesMutes(Population *population)
 {
+	/*** Les meilleurs et les clones sont compares                       ***/
+	/*** Chaque couple (meilleur,clone) est evalue...                    ***/
+	/*** Et on garde le meilleur des deux                                ***/
+	/*** Autre possibilite: tri des meilleurs et des clones (ensemble)   ***/
+	/*** Et on garde les meilleurs...                                    ***/
+	/*** LES DEUX VERSIONS SONT A FAIRE ET DOIVENT ETRE COMPAREES        ***/
+
 	int deltaNbIndividusEtNbClones = population->nbIndividus - population->nbClones;
 #if METHODESELECTION == 0 // Selection 2 à 2
 	for (size_t i = 0; i < population->nbClones; i++)
