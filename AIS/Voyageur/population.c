@@ -280,22 +280,11 @@ void mutationClones(Population *population)
 		muteAc(population->clones[i], 1);
 	}
 }
+
 /**
- * Sélectionne les meilleurs individus et les clones mutés dans la population.
- *
- * Cette fonction compare chaque paire d'individus (meilleur, clone muté) et conserve
- * le meilleur entre les deux. Il existe deux méthodes de sélection, activées par la
- * directive METHODESELECTION.
- *
- * - Si METHODESELECTION est défini à 0 :
- *   - La sélection se fait en comparant chaque paire (meilleur, clone) individuellement.
- *   - Le meilleur individu est conservé dans le tableau des clones, et le clone dans le tableau des individus.
- *
- * - Si METHODESELECTION est défini à 1 :
- *   - La population totale (individus et clones) est triée par ordre décroissant de .
- *   - Les meilleurs individus (en haut du classement) sont conservés dans le tableau des individus.
- *   - Les clones mutés sont placés dans le tableau des clones, en correspondance avec les meilleurs individus.
- *
+ * @brief  les meilleurs individus et les clones mutés dans la population.
+ * @brief Cette fonction compare chaque paire d'individus (meilleur, clone muté) et conserve 
+ * @brief le meilleur entre les deux. Il existe deux méthodes de sélection, activées par la
  * @param population Pointeur vers la structure Population contenant les individus et les clones.
  */
 void selectionMeilleursEtClonesMutes(Population *population)
