@@ -240,12 +240,13 @@ int main(int argc, char **argv)
 #if NBVILLES != 8 && NBVILLES != 16 && NBVILLES != 30
     genereCarte(&carte, COTECARTE);
 #endif
-
+    #if AFFICHE
     dessineCarte(fdGnuplot, &carte);
 
     sleep(3);
 
     printCarte(&carte);
+    #endif
 
     /*********************************************************/
     /******** Les choses serieuses commencent ****************/
@@ -262,17 +263,6 @@ int main(int argc, char **argv)
     triPopulation(&p);
 
     tour = 0;
-#if 0
-{
-    Ac ac;
-    genereAc(&ac);
-    printAc(&ac);
-    muteAc(&ac,1);/*mutation OK*/
-    printAc(&ac);
-    exit(0);
-}
-#endif
-    
 
     while (tour != nbGenerations)
     {
@@ -288,20 +278,19 @@ int main(int argc, char **argv)
             remplacementMauvaisParNouveaux(&p, NBNOUVEAUX);
         }
 
-        /* Fin a completer !! */
-
         triPopulation(&p);               /* Pour trouver le meilleur, la    */
         meilleur = meilleurIndividu(&p); /* population doit etre deja triee */
 
         if (meilleur.cout < LeMeilleur.cout)
         {
             cloneAc(&meilleur, &LeMeilleur);
-
+            #if AFFICHE
             dessineParcoursAc(fdGnuplot, &LeMeilleur);
             printCoutAc(&LeMeilleur);
 
             ecrireCout(fdCout, tour, LeMeilleur.cout);
             visualiserCout(fdGnuplotCout, fileNameCout);
+            #endif
         }
 
 #if NBVILLES == 8 || NBVILLES == 16 || NBVILLES == 30
@@ -316,16 +305,19 @@ int main(int argc, char **argv)
     /*********************************************************/
     /***** A la fin de la boucle, on affiche Le Meilleur *****/
     /*********************************************************/
-
+    #if AFFICHE
     printf("\n*** Voici la meilleure solution trouvee ***\n");
     dessineParcoursAc(fdGnuplot, &LeMeilleur);
     dessineParcoursAc(fdBest, &LeMeilleur);
+    #endif
     printCoutAc(&LeMeilleur);
+    #if AFFICHE
     printf("\n*** Avec %s %d %d %d %d %d\n", argv[0], nbIndividus,
            nN, dD, nbGenerations,
            nbGenerationsInjection);
+    #endif
 
-#if NBVILLES == 8 || NBVILLES == 16 || NBVILLES == 30
+#if (NBVILLES == 8 || NBVILLES == 16 || NBVILLES == 30) && AFFICHE
     if (compareAc(&LeMeilleur, &BestOf) <= 0)
     {
         printf("Meilleure solution obtenue en %d generations\n", tour);
@@ -342,7 +334,7 @@ int main(int argc, char **argv)
     }
 #endif
 
-#if 1
+#if AFFICHE
     sleep(2);                                     /* Dessin des          */
     dessineIndividusPopulation(fdGnuplot, &p, 5); /* meilleurs individus */
 #endif

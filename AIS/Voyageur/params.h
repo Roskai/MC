@@ -1,6 +1,8 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
+#define AFFICHE 0
+
 /**
  * @def METHODESELECTION
  * @brief Choix de la méthode de sélection pour l'algorithme génétique.
@@ -22,7 +24,7 @@
  * @note - 1 : Inversion d'une portion de l'individu \n
  * @note - 2 : Translation d'une portion de l'individu \n
  */
-#define METHODEMUTATION 1
+#define METHODEMUTATION 0
 #define NBMAXMUTATIONS 3
 
 #define NBVILLES 30
