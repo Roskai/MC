@@ -183,7 +183,7 @@ int main(int argc, char **argv)
                     &nbGenerations, &nbGenerationsInjection,
                     &nbClones, &nbNouveaux);
     }
-
+    #if AFFICHE
     fprintf(stderr, "\n*********\n");
     fprintf(stderr, "nbIndividus=%d\n", nbIndividus);
     fprintf(stderr, "N=%d => nbClones=%d\n", nN, nbClones);
@@ -191,6 +191,7 @@ int main(int argc, char **argv)
     fprintf(stderr, "nbGenerations=%d\n", nbGenerations);
     fprintf(stderr, "nbGenerationsInjection=%d\n", nbGenerationsInjection);
     fprintf(stderr, "*********\n\n");
+    #endif
 
     /****************************************/
     /******** Initialisation ****************/
@@ -293,7 +294,7 @@ int main(int argc, char **argv)
             #endif
         }
 
-#if NBVILLES == 8 || NBVILLES == 16 || NBVILLES == 30
+#if (NBVILLES == 8 || NBVILLES == 16 || NBVILLES == 30) && AFFICHE
         if (compareAc(&LeMeilleur, &BestOf) == 0)
         {
             printf("Stop! (meilleure solution trouvee... a priori)\n");

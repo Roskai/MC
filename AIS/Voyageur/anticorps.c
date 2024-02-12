@@ -105,7 +105,11 @@ void printParcoursAc(const Ac *ac)
 /* Affichage du cout d'un Anti-Corps */
 void printCoutAc(const Ac *ac)
 {
+	#if AFFICHE
 	printf("Cout:%f\n", ac->cout);
+	#else
+	printf("%f\n", ac->cout);
+	#endif
 }
 
 /* Dessin d'un Anti-Corps */

@@ -15,7 +15,9 @@ void initRandom(void) /* Initialisation generateur */
     static int pasEncore = 1;
     if (pasEncore)
     {
+        #if AFFICHE
         printf("Initialisation du generateur de nombres aleatoires\n");
+        #endif
         srand(time((time_t *)0)); /* Graine (generation de nombres aleatoires) */
         pasEncore = 0;
     }
