@@ -278,7 +278,8 @@ void mutationClones(Population *population)
 
 	for (size_t i = 0; i < nbClones; i++)
 	{
-		muteAc(population->clones[i], nbClones - i);
+		int nbMutations = NBMAXMUTATIONS-((i*NBMAXMUTATIONS)/nbClones);
+		muteAc(population->clones[i], nbMutations);
 	}
 }
 
@@ -336,7 +337,8 @@ void mutationMoinsBons(Population *population)
 
 	for (size_t i = 0; i < moinsBons; i++)
 	{
-		muteAc(population->individus[i], moinsBons - i);
+		int nbMutations = NBMAXMUTATIONS-((i*NBMAXMUTATIONS)/moinsBons);
+		muteAc(population->individus[i], nbMutations);
 	}
 }
 
