@@ -274,16 +274,17 @@ void mutationClones(Population *population)
 	/* Plus un clone est a droite, meilleur il est.                   */
 	/* On peut ainsi faire varier le nombre de mutations a effectuer. */
 	/* Dans un premier temps, le nombre de mutations peut etre fixe.  */
+	int nbClones = population->nbClones;
 
-	for (size_t i = 0; i < population->nbClones; i++)
+	for (size_t i = 0; i < nbClones; i++)
 	{
-		muteAc(population->clones[i], 1);
+		muteAc(population->clones[i], nbClones - i);
 	}
 }
 
 /**
  * @brief  les meilleurs individus et les clones mutés dans la population.
- * @brief Cette fonction compare chaque paire d'individus (meilleur, clone muté) et conserve 
+ * @brief Cette fonction compare chaque paire d'individus (meilleur, clone muté) et conserve
  * @brief le meilleur entre les deux. Il existe deux méthodes de sélection, activées par la
  * @param population Pointeur vers la structure Population contenant les individus et les clones.
  */
@@ -331,11 +332,11 @@ void mutationMoinsBons(Population *population)
 	/* Plus un mauvais est a droite, meilleur il est!                 */
 	/* On peut ainsi faire varier le nombre de mutations a effectuer. */
 	/* Dans un premier temps, le nombre de mutations peut etre fixe.  */
-	int nbMutation = 1; // TODO : Fixe pour l'instant
+	int moinsBons = population->nbIndividus - population->nbClones;
 
-	for (size_t i = 0; i < population->nbIndividus - population->nbClones; i++)
+	for (size_t i = 0; i < moinsBons; i++)
 	{
-		muteAc(population->individus[i], nbMutation);
+		muteAc(population->individus[i], moinsBons - i);
 	}
 }
 
