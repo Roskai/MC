@@ -213,9 +213,21 @@ void muteAc(Ac *ac, int nbMutations)
 				entierB = entierC;
 				entierC = temp; }
 
-			for (size_t j=0; j<(entierB-entierA)/2; j++) {
-				// TODO Translate
+			int nouv_parcours[ac->nbVilles];
+			int deltaBC = entierC - entierB;
+			int deltaAB = entierB - entierA;
+
+			for (size_t j=0; j<ac->nbVilles; j++) {
+				if (j < entierA || j > entierC) {
+					nouv_parcours[j] = ac->parcours[j];
+				} else if (j >= entierA && j <= entierB) {
+					nouv_parcours[j+deltaBC] = ac->parcours[j];
+				} else {
+					nouv_parcours[j-(deltaAB+1)] = ac->parcours[j];
+				}
 			}
+			ac->parcours = nouv_parcours;
+
 			int ville = ac->parcours[entierA];
 			ac->parcours[entierA] = ac->parcours[entierB];
 			ac->parcours[entierB] = ville;
