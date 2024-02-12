@@ -1,7 +1,7 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
-#define AFFICHE 0
+#define AFFICHE 1
 
 /**
  * @def METHODESELECTION
@@ -12,7 +12,7 @@
  * @note - 0 : Méthode "2 à 2" \n
  * @note - 1 : Tri de la population (sélection des meilleurs individus)\n
  */
-#define METHODESELECTION 0
+#define METHODESELECTION 1
 
 /**
  * @def METHODEMUTATION
@@ -24,7 +24,7 @@
  * @note - 1 : Inversion d'une portion de l'individu \n
  * @note - 2 : Translation d'une portion de l'individu \n
  */
-#define METHODEMUTATION 0
+#define METHODEMUTATION 1
 #define NBMAXMUTATIONS 3
 
 #define NBVILLES 30
