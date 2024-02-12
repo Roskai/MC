@@ -1,6 +1,6 @@
 /* anticorps.c : les anti-corps */
 #include <stdio.h>
-#include <math.h>   /* Pour fabs */
+#include <math.h>	/* Pour fabs */
 #include <stdlib.h> /* Pour malloc, free */
 #include <string.h> /* Pour memmove */
 
@@ -149,89 +149,110 @@ void cloneAc(const Ac *ac, Ac *nouvelAc)
 	memmove(nouvelAc->parcours, ac->parcours, ac->nbVilles * sizeof(int));
 }
 
-/* Mutation d'un Anti-Corps 
+/* Mutation d'un Anti-Corps
 @param ac l'anticorps a faire muter
 @param nbMutations nombre de mutation à faire subir
 */
 void muteAc(Ac *ac, int nbMutations)
 {
-	#if METHODEMUTATION == 0 // Mutation par échange
-		int i;
-		for ( i = 0; i < nbMutations; i++) {
-			int entierA = myRandomMinMax(0, ac->nbVilles - 1);
-			int entierB = myRandomMinMax(0, ac->nbVilles - 1);
-			while (entierB == entierA)
+#if METHODEMUTATION == 0 // Mutation par échange
+	int i;
+	for (i = 0; i < nbMutations; i++)
+	{
+		int entierA = myRandomMinMax(0, ac->nbVilles - 1);
+		int entierB = myRandomMinMax(0, ac->nbVilles - 1);
+		while (entierB == entierA)
+		{
+			entierB = myRandomMinMax(0, ac->nbVilles - 1);
+		}
+		int ville = ac->parcours[entierA];
+		ac->parcours[entierA] = ac->parcours[entierB];
+		ac->parcours[entierB] = ville;
+	}
+#elif METHODEMUTATION == 1 // Mutation par inversion
+	int i;
+	for (i = 0; i < nbMutations; i++)
+	{
+		int entierA = myRandomMinMax(0, ac->nbVilles - 1);
+		int entierB = myRandomMinMax(0, ac->nbVilles - 1);
+		while (entierB == entierA)
+			entierB = myRandomMinMax(0, ac->nbVilles - 1);
+
+		if (entierA > entierB)
+		{
+			int temp = entierA;
+			entierA = entierB;
+			entierB = temp;
+		}
+		for (size_t j = 0; j < (entierB - entierA) / 2; j++)
+		{
+			int temp = ac->parcours[entierA + j];
+			ac->parcours[entierA + j] = ac->parcours[entierB - j];
+			ac->parcours[entierB - j] = temp;
+		}
+		int ville = ac->parcours[entierA];
+		ac->parcours[entierA] = ac->parcours[entierB];
+		ac->parcours[entierB] = ville;
+	}
+#else					   // Mutation par translation
+	int i;
+	for (i = 0; i < nbMutations; i++)
+	{
+		int entierA = myRandomMinMax(0, ac->nbVilles - 1);
+		int entierB = myRandomMinMax(0, ac->nbVilles - 1);
+		while (entierB == entierA)
+			entierB = myRandomMinMax(0, ac->nbVilles - 1);
+		int entierC = myRandomMinMax(0, ac->nbVilles - 1);
+		while (entierC == entierA || entierC == entierB)
+			entierC = myRandomMinMax(0, ac->nbVilles - 1);
+
+		if (entierA > entierC)
+		{
+			int temp = entierA;
+			entierA = entierC;
+			entierC = temp;
+		}
+		if (entierA > entierB)
+		{
+			int temp = entierA;
+			entierA = entierB;
+			entierB = temp;
+		}
+		if (entierB > entierC)
+		{
+			int temp = entierB;
+			entierB = entierC;
+			entierC = temp;
+		}
+
+		int nouv_parcours[ac->nbVilles];
+		int deltaBC = entierC - entierB;
+		int deltaAB = entierB - entierA;
+
+		for (size_t j = 0; j < ac->nbVilles; j++)
+		{
+			if (j < entierA || j > entierC)
 			{
-				entierB = myRandomMinMax(0, ac->nbVilles - 1);
-			}	   
-			int ville = ac->parcours[entierA];
-			ac->parcours[entierA] = ac->parcours[entierB];
-			ac->parcours[entierB] = ville;
-		}
-	#elif METHODEMUTATION == 1 // Mutation par inversion
-		int i;
-		for ( i = 0; i < nbMutations; i++) {
-			int entierA = myRandomMinMax(0, ac->nbVilles - 1);
-			int entierB = myRandomMinMax(0, ac->nbVilles - 1);
-			while (entierB == entierA) entierB = myRandomMinMax(0, ac->nbVilles - 1);
-
-			if (entierA > entierB) {
-				int temp = entierA;
-				entierA = entierB;
-				entierB = temp;
+				nouv_parcours[j] = ac->parcours[j];
 			}
-			for (size_t j = 0; j < (entierB-entierA)/2; j++) {
-				int temp = ac->parcours[entierA+j];
-				ac->parcours[entierA+j] = ac->parcours[entierB-j];
-				ac->parcours[entierB-j] = temp;
+			else if (j >= entierA && j <= entierB)
+			{
+				nouv_parcours[j + deltaBC] = ac->parcours[j];
 			}
-			int ville = ac->parcours[entierA];
-			ac->parcours[entierA] = ac->parcours[entierB];
-			ac->parcours[entierB] = ville;
-		}
-	#else // Mutation par translation
-		int i;
-		for ( i = 0; i < nbMutations; i++) {
-			int entierA = myRandomMinMax(0, ac->nbVilles - 1);
-			int entierB = myRandomMinMax(0, ac->nbVilles - 1);
-			while (entierB == entierA)
-					entierB = myRandomMinMax(0, ac->nbVilles - 1);
-			int entierC = myRandomMinMax(0, ac->nbVilles - 1);
-			while (entierC == entierA || entierC == entierB)
-					entierC = myRandomMinMax(0, ac->nbVilles - 1);
-			
-			if (entierA > entierC) {
-				int temp = entierA;
-				entierA = entierC;
-				entierC = temp; }
-			if (entierA > entierB) {
-				int temp = entierA;
-				entierA = entierB;
-				entierB = temp; }
-			if (entierB > entierC) {
-				int temp = entierB;
-				entierB = entierC;
-				entierC = temp; }
-
-			int nouv_parcours[ac->nbVilles];
-			int deltaBC = entierC - entierB;
-			int deltaAB = entierB - entierA;
-
-			for (size_t j=0; j<ac->nbVilles; j++) {
-				if (j < entierA || j > entierC) {
-					nouv_parcours[j] = ac->parcours[j];
-				} else if (j >= entierA && j <= entierB) {
-					nouv_parcours[j+deltaBC] = ac->parcours[j];
-				} else {
-					nouv_parcours[j-(deltaAB+1)] = ac->parcours[j];
-				}
+			else
+			{
+				nouv_parcours[j - (deltaAB + 1)] = ac->parcours[j];
 			}
-			ac->parcours = nouv_parcours;
-
-			int ville = ac->parcours[entierA];
-			ac->parcours[entierA] = ac->parcours[entierB];
-			ac->parcours[entierB] = ville;
 		}
-	#endif
-	calculCoutAc(ac); 
+		for (size_t k = 0; k < ac->nbVilles; k++)
+		{
+			ac->parcours[k] = nouv_parcours[k];
+		}
+
+		int ville = ac->parcours[entierA];
+		ac->parcours[entierA] = ac->parcours[entierB];
+		ac->parcours[entierB] = ville;
+	}
+#endif
+	calculCoutAc(ac);
 }
