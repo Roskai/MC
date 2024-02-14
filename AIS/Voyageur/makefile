@@ -6,7 +6,7 @@ CC=cc
 TARGET=ais
 FILES=ais.c anticorps.c geo.c population.c random.c gnuplot.c
 OBJECTS=$(FILES:.c=.o)
-CLEANING=rm -f $(OBJECTS) $(TARGET) core a.out
+CLEANING=rm -f $(OBJECTS) $(TARGET) core a.out Cout Best
 
 #-------------------------------------------------------------
 
