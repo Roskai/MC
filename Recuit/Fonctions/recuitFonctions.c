@@ -57,13 +57,13 @@ void transformation(void)
 	y = y + ...; /* Apres y = x, modifier y (pas x!) */
 }
 
-/*________  Modification temp�rature  ______________________________________*/
+/*________  Modification température  ______________________________________*/
 double g(void)
 {
 #if 1
-	return (...); /* On decroit la temperature en utilisant T * alpha */
+	return (T * alpha); /* On decroit la temperature en utilisant T * alpha */
 #else
-	return (...); /* On decroit la temperature en utilisant T - alpha */
+	return (T - alpha); /* On decroit la temperature en utilisant T - alpha */
 #endif
 }
 
@@ -285,13 +285,13 @@ int main(void)
 	x = xopt = ...;	  /* Configuration initiale */
 	fx = fxopt = ...; /* Cout initial           */
 
-	T = ...; /* Temperature initiale   */
+	T = Ti; /* Temperature initiale   */
 	NbEssais = 0;
 
 	EcrireCoutEtVisu(fx, x, 1);
 	PrintALine(fdResults); /* Sauvegarde configuration initiale       */
 
-	while (...)
+	while (T > Tf)
 	{ /* 1er critere d'arret */
 
 		int rep;	  /* Nb de repetitions a temperature constante    */
