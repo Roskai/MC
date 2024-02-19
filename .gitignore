@@ -9,3 +9,5 @@ Best
 Cout
 .depend
 .vscode
+Recuit/Fonctions/*.o
+Recuit/Fonctions/recuitFonctions
