@@ -57,14 +57,18 @@ void transformation(void)
 	y = y + amplitude * (myRandom01()-0.5); /* Apres y = x, modifier y (pas x!) */
 }
 
-/*________  Modification temp�rature  ______________________________________*/
+/*________  Modification température  ______________________________________*/
 double g(void)
 {
 #if 1
+<<<<<<< HEAD
 	T = T *alpha;
 	return T; /* On decroit la temperature en utilisant T * alpha */
+=======
+	return (T * alpha); /* On decroit la temperature en utilisant T * alpha */
+>>>>>>> 62fe541fe9fc93edb3bd3bf066831d9b312716c0
 #else
-	return (...); /* On decroit la temperature en utilisant T - alpha */
+	return (T - alpha); /* On decroit la temperature en utilisant T - alpha */
 #endif
 }
 
@@ -286,13 +290,13 @@ int main(void)
 	x = xopt = ...;	  /* Configuration initiale */
 	fx = fxopt = ...; /* Cout initial           */
 
-	T = ...; /* Temperature initiale   */
+	T = Ti; /* Temperature initiale   */
 	NbEssais = 0;
 
 	EcrireCoutEtVisu(fx, x, 1);
 	PrintALine(fdResults); /* Sauvegarde configuration initiale       */
 
-	while (...)
+	while (T > Tf)
 	{ /* 1er critere d'arret */
 
 		int rep;	  /* Nb de repetitions a temperature constante    */
