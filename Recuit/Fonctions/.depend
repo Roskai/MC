@@ -1,6 +1,0 @@
-gnuplot.o: gnuplot.c gnuplot.h
-
-random.o: random.c random.h
-
-recuitFonctions.o: recuitFonctions.c random.h gnuplot.h
-
