@@ -27,8 +27,8 @@ char *fileNameResults = "Resultats";
 FILE *fdGnuplotCout;
 
 /*_________  Choix de la Fonction d'Evaluation   ___________________________*/
-#define F(x) f1_1(x) /* ... et la 1ere fonction exemple (ci-dessous)   */
-#define FNAME "f1_1" /* indiquer aussi son libelle (pour impressions)  */
+#define F(x) f1_2(x) /* ... et la 1ere fonction exemple (ci-dessous)   */
+#define FNAME "f1_2" /* indiquer aussi son libelle (pour impressions)  */
 
 /*_________  Etats du Recuit  ______________________________________________*/
 double x0;			  /* Etat initial */
@@ -60,7 +60,7 @@ void transformation(void)
 /*________  Modification temp�rature  ______________________________________*/
 double g(void)
 {
-#if 1
+#if 0
 	return T * alpha; /* On decroit la temperature en utilisant T * alpha */
 #else
 	return T - alpha; /* On decroit la temperature en utilisant T - alpha */
