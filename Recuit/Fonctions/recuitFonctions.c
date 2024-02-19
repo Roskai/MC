@@ -54,14 +54,15 @@ double f1_2(double t)
 void transformation(void)
 {
 	y = x;		 /* y est au voisinage de x suivant l'amplitude */
-	y = y + ...; /* Apres y = x, modifier y (pas x!) */
+	y = y + amplitude * (myRandom01()-0.5); /* Apres y = x, modifier y (pas x!) */
 }
 
 /*________  Modification temp�rature  ______________________________________*/
 double g(void)
 {
 #if 1
-	return (...); /* On decroit la temperature en utilisant T * alpha */
+	T = T *alpha;
+	return T; /* On decroit la temperature en utilisant T * alpha */
 #else
 	return (...); /* On decroit la temperature en utilisant T - alpha */
 #endif
