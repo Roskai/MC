@@ -18,7 +18,6 @@
   @note - 1 : Tri de la population (sélection des meilleurs individus)\n
  */
 #define METHODESELECTION 0
-
 /**
  * @def METHODEMUTATION
  * @brief Choix de la méthode de mutation pour l'algorithme génétique.
@@ -40,10 +39,10 @@
 
 #define NBMAXMUTATIONS 3
 
-#define NBVILLES 100
+#define NBVILLES 1000
 
 
-#define COTECARTE 10
+#define COTECARTE 100
 
 /* DANS LA SUITE, NE PAS TOUCHER:
    TAILLEPOP, N, D, NBGENERATIONS, NBGENERATIONSINJECTION !!!
