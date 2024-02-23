@@ -32,11 +32,11 @@
 #define METHODEMUTATION 1
 
 /**
- * @def NBMUTATIONDYNAMIQUE
+ * @def MUTATIONDYNAMIQUE
  * @brief Determine si le nombre de mutations doit être fixe.
  * @see population.c
 */
-#define NBMUTATIONDYNAMIQUE 1
+#define MUTATIONDYNAMIQUE 1
 
 #define NBMAXMUTATIONS 3
 

@@ -278,7 +278,7 @@ void mutationClones(Population *population)
 
 	for (size_t i = 0; i < nbClones; i++)
 	{
-#if NBMUTATIONDYNAMIQUE
+#if MUTATIONDYNAMIQUE
 		int nbMutations = NBMAXMUTATIONS - ((i * NBMAXMUTATIONS) / nbClones);
 #else
 		int nbMutations = NBMAXMUTATIONS;
@@ -341,7 +341,7 @@ void mutationMoinsBons(Population *population)
 
 	for (size_t i = 0; i < moinsBons; i++)
 	{
-#if NBMUTATIONDYNAMIQUE
+#if MUTATIONDYNAMIQUE
 		int nbMutations = NBMAXMUTATIONS - ((i * NBMAXMUTATIONS) / moinsBons);
 #else
 		int nbMutations = NBMAXMUTATIONS;
