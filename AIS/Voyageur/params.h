@@ -1,7 +1,7 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
-#include "param_change.h"
+#include "params_change.h"
 
 #define AFFICHE 0
 

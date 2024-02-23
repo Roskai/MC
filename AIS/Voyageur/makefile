@@ -15,7 +15,7 @@ $(TARGET): $(OBJECTS)
 
 #-------------------------------------------------------------
 
-ais.o: params.h ais.c
+ais.o: params.h params_change.h ais.c
 	$(CC) -c ais.c -o ais.o
 
 anticorps.o: params.h anticorps.c
