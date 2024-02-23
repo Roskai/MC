@@ -48,14 +48,14 @@ for dynamique in 0 1
 do
 	MUTATIONDYNAMIQUE=$dynamique
 	echo change1
-	for nbmutations in 1
+	for nbmutations in 1 3 10
 	do
 		NBMAXMUTATIONS=$nbmutations
 		echo change2
 		for mutation in 0 1 2
 		do
 			METHODEMUTATION=$mutation
-			for nbnouveaux in 25 50 75
+			for nbnouveaux in 35 55
 			do
 				for nbvilles in 100 30
 				do
@@ -64,7 +64,7 @@ do
 					do
 						METHODESELECTION=$selection
 						set_param
-						for nbgeninjection in 25 85 175
+						for nbgeninjection in 45 125
 						do
 							for taillepop in 350
 							do

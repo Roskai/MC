@@ -17,7 +17,7 @@
   @note - 0 : Méthode "2 à 2" \n
   @note - 1 : Tri de la population (sélection des meilleurs individus)\n
  */
-#define METHODESELECTION 0
+#define METHODESELECTION 1
 /**
  * @def METHODEMUTATION
  * @brief Choix de la méthode de mutation pour l'algorithme génétique.
@@ -28,7 +28,7 @@
   @note - 1 : Inversion d'une portion de l'individu \n
   @note - 2 : Translation d'une portion de l'individu \n
  */
-#define METHODEMUTATION 0
+#define METHODEMUTATION 2
 
 /**
  * @def MUTATIONDYNAMIQUE
@@ -37,9 +37,9 @@
 */
 #define MUTATIONDYNAMIQUE 1
 
-#define NBMAXMUTATIONS 1
+#define NBMAXMUTATIONS 10
 
-#define NBVILLES 100
+#define NBVILLES 30
 
 
 #define COTECARTE 10
