@@ -4,6 +4,7 @@ METHODESELECTION=1
 METHODEMUTATION=1
 NBMAXMUTATIONS=3
 NBVILLES=30
+NBMUTATIONDYNAMIQUE=0
 
 function moyenne() {
 	total=0.0
@@ -41,12 +42,39 @@ function set_param() {
 	make &> /dev/null
 }
 
-METHODESELECTION=1
-METHODEMUTATION=1
-NBMAXMUTATIONS=3
-NBVILLES=10000
-set_param
-echo "$(moyenne $1 1000 100 0 1000 0)"
+
+
+for nbgeninjection in 25 85 175
+do
+	echo change1
+	for nbnouveaux in 25 50 75
+	do
+		echo change2
+		for nbvilles in 100 30
+		do
+			NBVILLES=$nbvilles
+			for mutation in 0 1 2
+			do
+				METHODEMUTATION=$mutation
+				for selection in 0 1
+				do
+					METHODESELECTION=$selection
+					set_param
+					for taillepop in 350
+					do
+						for nbgeneration in 350
+						do
+							for nbclones in 45
+							do
+								echo "$(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)"
+							done
+						done
+					done
+				done
+			done
+		done
+	done
+done
 
 # for mutation in 0 1 2
 # do

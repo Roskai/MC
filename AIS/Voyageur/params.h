@@ -1,7 +1,11 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
-
+/**
+ * @def AFFICHE
+ * @brief Si a false (0) affiche uniquement le cout du meilleur resultat
+ * @note Active ou désactive les GNU Plots et le détails des résultats (équivalent a un --verbose)
+*/
 #define AFFICHE 0
 
 /**
@@ -10,22 +14,28 @@
  *
  *
  * @note Valeurs possibles :\n
- * @note - 0 : Méthode "2 à 2" \n
- * @note - 1 : Tri de la population (sélection des meilleurs individus)\n
+  @note - 0 : Méthode "2 à 2" \n
+  @note - 1 : Tri de la population (sélection des meilleurs individus)\n
  */
-#define METHODESELECTION 1
+#define METHODESELECTION 0
 /**
- * Voir param_change.h
  * @def METHODEMUTATION
  * @brief Choix de la méthode de mutation pour l'algorithme génétique.
  *
  *
- * @note Valeurs possibles : \n
- * @note - 0 : Échange de deux éléments dans l'individu \n
- * @note - 1 : Inversion d'une portion de l'individu \n
- * @note - 2 : Translation d'une portion de l'individu \n
+  @note Valeurs possibles : \n
+  @note - 0 : Échange de deux éléments dans l'individu \n
+  @note - 1 : Inversion d'une portion de l'individu \n
+  @note - 2 : Translation d'une portion de l'individu \n
  */
 #define METHODEMUTATION 1
+
+/**
+ * @def NBMUTATIONDYNAMIQUE
+ * @brief Determine si le nombre de mutations doit être fixe.
+ * @see population.c
+*/
+#define NBMUTATIONDYNAMIQUE 1
 
 #define NBMAXMUTATIONS 3
 
@@ -64,9 +74,17 @@
 #error "Attention: D trop grand"
 #endif
 
+#if METHODESELECTION > 1 || METHODESELECTION < 0
+#error "Choix de la méthode de selection incorrecte"
+#error "Doit être contenu ente 0 et 1"
+#error " Valeurs possibles : "
+#error "0 : Méthode 2 à 2 "
+#error "1 : Tri de la population (sélection des meilleurs individus) "
+#endif 
+
 #if METHODEMUTATION > 3 || METHODEMUTATION < 0
 #error "Choix de la méthode de mutation incorrecte"
-#error "Doit être contenut ente 0 et 3"
+#error "Doit être contenu ente 0 et 3"
 #error " Valeurs possibles : "
 #error "0 : Échange de deux éléments dans l'individu "
 #error "1 : Inversion d'une portion de l'individu "
