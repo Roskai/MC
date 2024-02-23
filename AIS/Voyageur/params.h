@@ -6,14 +6,14 @@
  * @brief Si a false (0) affiche uniquement le cout du meilleur resultat
  * @note Active ou désactive les GNU Plots et le détails des résultats (équivalent a un --verbose)
 */
-#define AFFICHE 0
+#define AFFICHE 1
 
 /**
  * @def METHODESELECTION
  * @brief Choix de la méthode de sélection pour l'algorithme génétique.
  *
  *
- * @note Valeurs possibles :\n
+ * @note Valeurs possibles : \n
   @note - 0 : Méthode "2 à 2" \n
   @note - 1 : Tri de la population (sélection des meilleurs individus)\n
  */
@@ -37,7 +37,7 @@
 */
 #define MUTATIONDYNAMIQUE 1
 
-#define NBMAXMUTATIONS 10
+#define NBMAXMUTATIONS 3
 
 #define NBVILLES 30
 
