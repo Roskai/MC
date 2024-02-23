@@ -4,6 +4,7 @@ METHODESELECTION=1
 METHODEMUTATION=1
 NBMAXMUTATIONS=3
 NBVILLES=30
+NBMUTATIONDYNAMIQUE=0
 
 function moyenne() {
 	total=0.0
@@ -41,7 +42,7 @@ function set_param() {
 	make &> /dev/null
 }
 
-touch ./result.csv
+
 
 for nbgeninjection in 25 85 175
 do
