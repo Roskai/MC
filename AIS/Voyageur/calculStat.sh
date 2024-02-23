@@ -29,7 +29,6 @@ function moyenne() {
 	fi
 }
 ####
-# Supprimer et le fichier params_change
 # Cela permet de changer les différentes méthode 
 # cela permet de tester les differentes façon
 ####
