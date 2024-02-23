@@ -13,23 +13,25 @@ function moyenne() {
 		number=$(./ais $2 $3 $4 $5 $6)
 		if [[ "$number" =~ ^[+-]?[0-9]*\.?[0-9]+$ ]]; then
 			total=$(awk "BEGIN {printf \"%.10f\", $total + $number}" | tr ',' '.')
-			#echo "$count : $number"
 			((count++))
 		else
-			echo "Erreur : '$number' n'est pas un nombre à virgule flottante valide."
+			echo "Erreur : '$number' n'est pas un nombre."
 		fi
 		#sleep 1
 	done
 
 	if [ $count -gt 0 ]; then
 		average=$(awk "BEGIN {printf \"%.10f\", $total / $count}")
-		#echo "Moyenne pour $2 $3 $4 $5 $6 : $average"
 		echo $average
 	else
-		echo "Aucun nombre à virgule flottante valide trouvé."
+		echo "Aucun nombre valide trouvé."
 	fi
 }
-
+####
+# Supprimer et le fichier params_change
+# Cela permet de changer les différentes méthode 
+# cela permet de tester les differentes façon
+####
 function set_param() {
 	file=./params_change.h
 
@@ -41,13 +43,13 @@ function set_param() {
 	echo "#define NBMAXMUTATIONS $NBMAXMUTATIONS" >> $file
 	echo "#define NBVILLES $NBVILLES" >> $file
 
-	make clean > null
-	make > null
+	make clean &> /dev/null
+	make &> /dev/null
 }
 
 touch ./result.csv
 
-for nbgeninjection in 20 50 100
+for nbgeninjection in 25 85 175
 do
 	echo change1
 	for nbnouveaux in 25 50 75
