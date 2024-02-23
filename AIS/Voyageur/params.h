@@ -28,7 +28,7 @@
   @note - 1 : Inversion d'une portion de l'individu \n
   @note - 2 : Translation d'une portion de l'individu \n
  */
-#define METHODEMUTATION 2
+#define METHODEMUTATION 1
 
 /**
  * @def MUTATIONDYNAMIQUE

@@ -42,44 +42,24 @@ function set_param() {
 	make &> /dev/null
 }
 
+POPULATION=3500
+POURCENTAGECLONES=45
+POURCENTAGENOUVEAUX=25
+NBGENERATIONS=1650
+NBGENERATIONSINJECTION=75
+set_param
 
-
-for dynamique in 0 1
-do
-	MUTATIONDYNAMIQUE=$dynamique
-	echo change1
-	for nbmutations in 1 3 10
-	do
-		NBMAXMUTATIONS=$nbmutations
-		echo change2
-		for mutation in 0 1 2
-		do
-			METHODEMUTATION=$mutation
-			for nbnouveaux in 35 55
-			do
-				for nbvilles in 100 30
-				do
-					NBVILLES=$nbvilles
-					for selection in 0 1
-					do
-						METHODESELECTION=$selection
-						set_param
-						for nbgeninjection in 45 125
-						do
-							for taillepop in 350
-							do
-								for nbgeneration in 350
-								do
-									for nbclones in 45
-									do
-										echo "$(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)"
-									done
-								done
-							done
-						done
-					done
-				done
-			done
-		done
-	done
-done
+echo "Pour les paramètres :"
+echo "    NBVILLES=$NBVILLES"
+echo "    METHODESELECTION=$METHODESELECTION"
+echo "    METHODEMUTATION=$METHODEMUTATION"
+echo "    NBMAXMUTATIONS=$NBMAXMUTATIONS"
+echo "    MUTATIONDYNAMIQUE=$MUTATIONDYNAMIQUE"
+echo "    "
+echo "    POPULATION=$POPULATION"
+echo "    POURCENTAGECLONES=$POURCENTAGECLONES"
+echo "    POURCENTAGENOUVEAUX=$POURCENTAGENOUVEAUX"
+echo "    NBGENERATIONS=$NBGENERATIONS"
+echo "    NBGENERATIONSINJECTION=$NBGENERATIONSINJECTION"
+echo "Résultat :"
+echo "    $(moyenne 20 $POPULATION $POURCENTAGECLONES $POURCENTAGENOUVEAUX $NBGENERATIONS $NBGENERATIONSINJECTION)"
