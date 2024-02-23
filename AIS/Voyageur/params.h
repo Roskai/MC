@@ -1,12 +1,10 @@
 #ifndef PARAMS_H
 #define PARAMS_H
 
-#include "params_change.h"
 
 #define AFFICHE 0
 
 /**
- * Voir param_change.h
  * @def METHODESELECTION
  * @brief Choix de la méthode de sélection pour l'algorithme génétique.
  *
@@ -15,6 +13,7 @@
  * @note - 0 : Méthode "2 à 2" \n
  * @note - 1 : Tri de la population (sélection des meilleurs individus)\n
  */
+#define METHODESELECTION 0
 /**
  * Voir param_change.h
  * @def METHODEMUTATION
@@ -26,10 +25,13 @@
  * @note - 1 : Inversion d'une portion de l'individu \n
  * @note - 2 : Translation d'une portion de l'individu \n
  */
+#define METHODEMUTATION 1
 
-/**
- * ...
-*/
+#define NBMAXMUTATIONS 3
+
+#define NBVILLES 100
+
+
 #define COTECARTE 10
 
 /* DANS LA SUITE, NE PAS TOUCHER:

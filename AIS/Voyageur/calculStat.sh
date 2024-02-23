@@ -33,16 +33,10 @@ function moyenne() {
 # cela permet de tester les differentes façon
 ####
 function set_param() {
-	file=./params_change.h
-
-	rm $file
-	touch $file
-
-	echo "#define METHODESELECTION $METHODESELECTION" >> $file
-	echo "#define METHODEMUTATION $METHODEMUTATION" >> $file
-	echo "#define NBMAXMUTATIONS $NBMAXMUTATIONS" >> $file
-	echo "#define NBVILLES $NBVILLES" >> $file
-
+	sed -i 's/\#define METHODESELECTION .*/\#define METHODESELECTION '"$METHODESELECTION"'/g' params.h
+	sed -i 's/\#define METHODEMUTATION .*/\#define METHODEMUTATION '"$METHODEMUTATION"'/g' params.h
+	sed -i 's/\#define NBMAXMUTATIONS .*/\#define NBMAXMUTATIONS '"$NBMAXMUTATIONS"'/g' params.h
+	sed -i 's/\#define NBVILLES .*/\#define NBVILLES '"$NBVILLES"'/g' params.h
 	make clean &> /dev/null
 	make &> /dev/null
 }
