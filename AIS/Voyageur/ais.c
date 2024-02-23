@@ -206,7 +206,6 @@ int main(int argc, char **argv)
     }
 
 
-#if AFFICHE
     fdGnuplot = openGnuplot(NULL); /* pipe + fork pour visu    */
     if (fdGnuplot == NULL)
     {
@@ -237,7 +236,6 @@ int main(int argc, char **argv)
         closeGnuplot(fdGnuplotCout);
         exit(EXIT_FAILURE);
     }
-#endif
     initRandom();
 
 #if NBVILLES != 8 && NBVILLES != 16 && NBVILLES != 30

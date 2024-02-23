@@ -44,29 +44,37 @@ function set_param() {
 
 
 
-for nbgeninjection in 25 85 175
+for dynamique in 0 1
 do
+	MUTATIONDYNAMIQUE=$dynamique
 	echo change1
-	for nbnouveaux in 25 50 75
+	for nbmutations in 1
 	do
+		NBMAXMUTATIONS=$nbmutations
 		echo change2
-		for nbvilles in 100 30
+		for mutation in 0 1 2
 		do
-			NBVILLES=$nbvilles
-			for mutation in 0 1 2
+			METHODEMUTATION=$mutation
+			for nbnouveaux in 25 50 75
 			do
-				METHODEMUTATION=$mutation
-				for selection in 0 1
+				for nbvilles in 100 30
 				do
-					METHODESELECTION=$selection
-					set_param
-					for taillepop in 350
+					NBVILLES=$nbvilles
+					for selection in 0 1
 					do
-						for nbgeneration in 350
+						METHODESELECTION=$selection
+						set_param
+						for nbgeninjection in 25 85 175
 						do
-							for nbclones in 45
+							for taillepop in 350
 							do
-								echo "$(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)"
+								for nbgeneration in 350
+								do
+									for nbclones in 45
+									do
+										echo "$(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)"
+									done
+								done
 							done
 						done
 					done
@@ -75,34 +83,3 @@ do
 		done
 	done
 done
-
-# for mutation in 0 1 2
-# do
-# 	METHODEMUTATION=$mutation
-# 	echo change1
-# 	for nbnouveaux in 25 50 75
-# 	do
-# 		for nbvilles in 100 30
-# 		do
-# 			NBVILLES=$nbvilles
-# 			for selection in 0 1
-# 			do
-# 				METHODESELECTION=$selection
-# 				set_param
-# 				for nbgeninjection in 25 85 175
-# 				do
-# 					for taillepop in 350
-# 					do
-# 						for nbgeneration in 350
-# 						do
-# 							for nbclones in 45
-# 							do
-# 								echo "$(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)"
-# 							done
-# 						done
-# 					done
-# 				done
-# 			done
-# 		done
-# 	done
-# done

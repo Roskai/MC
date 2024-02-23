@@ -28,7 +28,7 @@
   @note - 1 : Inversion d'une portion de l'individu \n
   @note - 2 : Translation d'une portion de l'individu \n
  */
-#define METHODEMUTATION 1
+#define METHODEMUTATION 0
 
 /**
  * @def MUTATIONDYNAMIQUE
@@ -37,12 +37,12 @@
 */
 #define MUTATIONDYNAMIQUE 1
 
-#define NBMAXMUTATIONS 3
+#define NBMAXMUTATIONS 1
 
-#define NBVILLES 1000
+#define NBVILLES 100
 
 
-#define COTECARTE 100
+#define COTECARTE 10
 
 /* DANS LA SUITE, NE PAS TOUCHER:
    TAILLEPOP, N, D, NBGENERATIONS, NBGENERATIONSINJECTION !!!
