@@ -1,4 +1,3 @@
-AIS/*.pdf
 AIS/Voyageur/*.o
 AIS/ais30
 AIS/ais16
@@ -12,4 +11,3 @@ Cout
 *.o
 Recuit/Fonctions/recuitFonctions
 Recuit/Fonctions/Resultats
-AIS/.~lock.notes.ods#
