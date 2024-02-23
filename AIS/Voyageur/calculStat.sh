@@ -41,71 +41,35 @@ function set_param() {
 	make &> /dev/null
 }
 
-touch ./result.csv
+METHODESELECTION=1
+METHODEMUTATION=1
+NBMAXMUTATIONS=3
+NBVILLES=10000
+set_param
+echo "$(moyenne $1 1000 100 0 1000 0)"
 
-for nbgeninjection in 25 85 175
-do
-	echo change1
-	for nbnouveaux in 25 50 75
-	do
-		echo change2
-		for nbvilles in 100 30
-		do
-			NBVILLES=$nbvilles
-			for mutation in 0 1 2
-			do
-				METHODEMUTATION=$mutation
-				for selection in 0 1
-				do
-					METHODESELECTION=$selection
-					set_param
-					for taillepop in 350
-					do
-						for nbgeneration in 350
-						do
-							for nbclones in 45
-							do
-								echo "$(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)"
-							done
-						done
-					done
-				done
-			done
-		done
-	done
-done
-
-
-
-# for nbvilles in 100 30 8
+# for mutation in 0 1 2
 # do
-# 	NBVILLES=$nbvilles
-# 	echo "NbVilles : $nbvilles" >> ./result.txt
-# 	for selection in 0 1
+# 	METHODEMUTATION=$mutation
+# 	echo change1
+# 	for nbnouveaux in 25 50 75
 # 	do
-# 		METHODESELECTION=$selection
-# 		echo "   Selection : $selection" >> ./result.txt
-# 		for mutation in 0 1 2
+# 		for nbvilles in 100 30
 # 		do
-# 			METHODEMUTATION=$mutation
-# 			echo "      Mutation : $mutation" >> ./result.txt
-# 			for nbmaxmutations in 3 1
+# 			NBVILLES=$nbvilles
+# 			for selection in 0 1
 # 			do
-# 				NBMAXMUTATIONS=$nbmaxmutations
-# 				echo "         NbMutations : $nbmaxmutations" >> ./result.txt
+# 				METHODESELECTION=$selection
 # 				set_param
-# 				for taillepop in 100 350 1000
+# 				for nbgeninjection in 25 85 175
 # 				do
-# 					for nbclones in 25 50 75
+# 					for taillepop in 350
 # 					do
-# 						for nbnouveaux in 25 50 75
+# 						for nbgeneration in 350
 # 						do
-# 							for nbgeneration in 100 350 1000
+# 							for nbclones in 45
 # 							do
-# 								for nbgeninjection in 20 50 100
-# 								do
-# 									echo "            $(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)" >> ./result.txt
-# 								done
+# 								echo "$(moyenne $1 $taillepop $nbclones $nbnouveaux $nbgeneration $nbgeninjection)"
 # 							done
 # 						done
 # 					done

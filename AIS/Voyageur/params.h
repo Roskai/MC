@@ -13,7 +13,7 @@
  * @note - 0 : Méthode "2 à 2" \n
  * @note - 1 : Tri de la population (sélection des meilleurs individus)\n
  */
-#define METHODESELECTION 0
+#define METHODESELECTION 1
 /**
  * Voir param_change.h
  * @def METHODEMUTATION
@@ -29,10 +29,10 @@
 
 #define NBMAXMUTATIONS 3
 
-#define NBVILLES 100
+#define NBVILLES 1000
 
 
-#define COTECARTE 10
+#define COTECARTE 100
 
 /* DANS LA SUITE, NE PAS TOUCHER:
    TAILLEPOP, N, D, NBGENERATIONS, NBGENERATIONSINJECTION !!!
