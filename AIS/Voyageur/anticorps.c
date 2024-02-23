@@ -153,9 +153,9 @@ void cloneAc(const Ac *ac, Ac *nouvelAc)
 	memmove(nouvelAc->parcours, ac->parcours, ac->nbVilles * sizeof(int));
 }
 
-/* Mutation d'un Anti-Corps
-@param ac l'anticorps a faire muter
-@param nbMutations nombre de mutation à faire subir
+/** Mutation d'un Anti-Corps
+* @param ac l'anticorps a faire muter
+* @param nbMutations nombre de mutation à faire subir
 */
 void muteAc(Ac *ac, int nbMutations)
 {
