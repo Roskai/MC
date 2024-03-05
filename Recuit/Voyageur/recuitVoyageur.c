@@ -113,13 +113,13 @@ void dessineChemin(FILE *flot, Chemin chemin)
 void transformationChemin(Chemin *cheminY,
 						  Chemin cheminX, int amplitude)
 {
-	*cheminY = cheminX; /* *cheminY est au voisinage de cheminX suivant     */
-						/*  l'amplitude. Apres *cheminY =  cheminX, ne plus */
-						/*  modifier cheminX !!!                            */
+	/* *cheminY est au voisinage de cheminX suivant     */
+	/*  l'amplitude. Apres *cheminY =  cheminX, ne plus */
+	/*  modifier cheminX !!!                            */
 
-
+	*cheminY = cheminX; 
 	int i;
-	int nbTourBoucle = myRandomMinMax (1, amplitude);
+	int nbTourBoucle = myRandomMinMax(1, amplitude);
 
 	for (i = 0; i < nbTourBoucle; i++)
 	{
@@ -146,11 +146,9 @@ void transformationChemin(Chemin *cheminY,
 	}
 	calculCoutChemin(*cheminY);
 
+	
 }
-void muteChemin (Chemin* chemin)
-{
 
-}
 /*--------------- Parametres de controle du recuit --------------------*/
 
 double T;  /* Temperature T        */
@@ -187,7 +185,7 @@ double fx, fy, fxopt; /* Valeurs */
 /*________  Fonctions Exemples  (Fonction de coût) _______________________*/
 double f(Chemin chemin)
 {
-	return calculCoutChemin(chemin) ;
+	return calculCoutChemin(chemin);
 }
 
 /*________  Voisinage (modification configuration)  ______________________*/
@@ -337,7 +335,7 @@ void EcrireCoutEtVisu(double fx, Chemin x, int affichageObligatoire)
 	(void)x;
 	(void)affichageObligatoire;
 	ecrireCout(fdCout, NbEssais, fx);
-	Visu(x, affichageObligatoire);
+	//Visu(x, affichageObligatoire);
 }
 
 void FermetureFlots(void)
@@ -386,7 +384,7 @@ int main(void)
 	scanf("%d", &MaxRepetitions);
 
 	PrintParameters(stdout);
-
+/* ---- 
 	do
 	{
 		printf("Sauvegarde des resultats dans un fichier? (o/n)\n");
@@ -409,10 +407,10 @@ int main(void)
 		}
 	}
 
-	/*  si on veut avoir un en-tete d'identification */
+	//  si on veut avoir un en-tete d'identification
 	PrintParameters(fdResults);
 	PrintTitleLine(fdResults);
-
+*/
 	fdCout = fopen(fileNameCout, "w"); /* Ouverture du fichier pour les couts */
 	if (fdCout == NULL)
 	{
@@ -449,7 +447,7 @@ int main(void)
 	T = Ti; /* Temperature initiale   */
 	NbEssais = 0;
 
-	EcrireCoutEtVisu(fx, x, 1);
+	//EcrireCoutEtVisu(fx, x, 1);
 	PrintALine(fdResults); /* Sauvegarde configuration initiale       */
 
 	while (T > Tf)
@@ -466,7 +464,7 @@ int main(void)
 
 			Df = fy - fx; /* Nouveau - Ancien         */
 
-			if (Df > 0)
+			if (Df < 0)
 			{		   /* Descente !!              */
 				x = y; /* y devient l'etat courant */
 				fx = fy;
@@ -506,7 +504,7 @@ int main(void)
 	printf("Temperature a la fin de l'algorithme=%f\n", T);
 	printf("Cout optimal (fxopt)=%f\n", fxopt);
 	printf("<--------------------\n");
-	Visu(xopt, 1);
+	//Visu(xopt, 1);
 
 	FermetureFlots();
 
