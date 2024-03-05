@@ -20,8 +20,8 @@ void initRandom(void) /* Initialisation generateur */
 		pasEncore = 0;
 	}
 }
-
-int myRandomMinMax(int min, int max) /* Generation dans [min,max] */
+/* Generation dans [min,max] */
+int myRandomMinMax(int min, int max) 
 {
 	double interval = 0.0;
 	int val;
@@ -44,8 +44,8 @@ int myRandomMinMax(int min, int max) /* Generation dans [min,max] */
 
 	return val; /* [min,max] */
 }
-
-double myRandom01(void) /* Generation dans [0.0,1.0] */
+/* Generation dans [0.0,1.0] */
+double myRandom01(void) 
 {
 	return ((double)rand() / RAND_MAX); /* [0.0,1.0] */
 }

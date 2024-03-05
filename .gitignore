@@ -10,4 +10,6 @@ Cout
 .vscode
 *.o
 Recuit/Fonctions/recuitFonctions
-Recuit/Fonctions/Resultats
+Recuit/Voyageur/recuitVoyageur
+.gitignore
+Resultats

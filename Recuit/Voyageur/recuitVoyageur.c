@@ -116,9 +116,41 @@ void transformationChemin(Chemin *cheminY,
 	*cheminY = cheminX; /* *cheminY est au voisinage de cheminX suivant     */
 						/*  l'amplitude. Apres *cheminY =  cheminX, ne plus */
 						/*  modifier cheminX !!!                            */
-	...
-}
 
+
+	int i;
+	int nbTourBoucle = myRandomMinMax (1, amplitude);
+
+	for (i = 0; i < nbTourBoucle; i++)
+	{
+		int entierA = myRandomMinMax(0, cheminY->nbVilles - 1);
+		int entierB = myRandomMinMax(0, cheminY->nbVilles - 1);
+		while (entierB == entierA)
+			entierB = myRandomMinMax(0, cheminY->nbVilles - 1);
+
+		if (entierA > entierB)
+		{
+			int temp = entierA;
+			entierA = entierB;
+			entierB = temp;
+		}
+		for (size_t j = 0; j < (entierB - entierA) / 2; j++)
+		{
+			int temp = cheminY->parcours[entierA + j];
+			cheminY->parcours[entierA + j] = cheminY->parcours[entierB - j];
+			cheminY->parcours[entierB - j] = temp;
+		}
+		int ville = cheminY->parcours[entierA];
+		cheminY->parcours[entierA] = cheminY->parcours[entierB];
+		cheminY->parcours[entierB] = ville;
+	}
+	calculCoutChemin(*cheminY);
+
+}
+void muteChemin (Chemin* chemin)
+{
+
+}
 /*--------------- Parametres de controle du recuit --------------------*/
 
 double T;  /* Temperature T        */
@@ -155,7 +187,7 @@ double fx, fy, fxopt; /* Valeurs */
 /*________  Fonctions Exemples  (Fonction de coût) _______________________*/
 double f(Chemin chemin)
 {
-	return ...;
+	return calculCoutChemin(chemin) ;
 }
 
 /*________  Voisinage (modification configuration)  ______________________*/
@@ -167,7 +199,7 @@ void transformation(void)
 /*________  Modification temperature  ____________________________________*/
 double g(void)
 {
-#if 0
+#if 1
 	return T * alpha; /* On decroit la temperature en utilisant T * alpha */
 #else
 	return T - alpha; /* On decroit la temperature en utilisant T - alpha */
