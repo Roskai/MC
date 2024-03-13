@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
-// File       : exercice1.fuz
-// Usage      : fonction -v <filename> (prog. ecrit par P.Reignier)
+// File       : exemplePoly.fuz
+// Usage      : pg <filename> (prog. ecrit par P.Reignier)
 // ----------------------------------------------------------------------------
 
 configuration
@@ -14,24 +14,31 @@ configuration
 
 linguistique
 {
+ // Ensembles d'entrée
  // Valeurs linguistiques des variables linguistiques X et Y
  petit := rampe_bas(0.0, 0.5);
  grand := rampe_haut(0.0, 0.5);
 
+ // Ensembles de sortie
  // Valeurs linguistiques de la variable linguistique Z
- petitZ := triangle(-5, 0.0,5);
- grandZ := triangle( 11.75, 12.0, 12.25);
+ // -- Figure 2-4
+ petitZ := triangle(-0.25, 0.00, 0.25);
+ // -- Figure 3
+ petitZ3 := triangle(-5.00, 0.00, 5.00);
+ // -- Toutes figures
+ grandZ := triangle(11.75,12.00,12.25);
 }
 
 regles
 {
- si X est petit alors Z est petitZ; 
- si X est grand alors Z est grandZ;
-
- si X est petit ou Y est grand alors Z est petitZ;
+ // -- Figure 2
+ // si X est petit alors Z est petitZ;
+ // si X est grand alors Z est grandZ;
+ // -- Figure 3
+ // si X est petit alors Z est petitZ3;
+ // si X est grand alors Z est grandZ;
+ // -- Figure 4
+ si X est petit ou Y est petit alors Z est petitZ;
  si X est grand et Y est grand alors Z est grandZ;
-
- si X est petit alors Z est petitZ;
- si X est grand alors Z est grandZ;
 }
 // ---End-Of-File-------------------------------------------------------------
