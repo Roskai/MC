@@ -27,6 +27,6 @@ linguistique
 regles
 {
  si X est petit alors Z est petitZ;
- si X est grand  alors Z est grandZ;
+ si X est grand alors Z est grandZ;
 }
 // ---End-Of-File-------------------------------------------------------------
