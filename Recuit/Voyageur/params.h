@@ -1,8 +1,9 @@
 #ifndef PARAM_H
 #define PARAM_H
 
-#define  NBVILLES    30
-#define COTECARTE    10
+#define NBVILLES 30
+#define COTECARTE 10
+#define DECROISSEMENT_TEMP 1
 
 /*********************************************************************/
 /************ Verification contraintes sur les defines ***************/

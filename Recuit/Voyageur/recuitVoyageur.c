@@ -117,7 +117,7 @@ void transformationChemin(Chemin *cheminY,
 	/*  l'amplitude. Apres *cheminY =  cheminX, ne plus */
 	/*  modifier cheminX !!!                            */
 
-	*cheminY = cheminX; 
+	*cheminY = cheminX;
 	int i;
 	int nbTourBoucle = myRandomMinMax(1, amplitude);
 
@@ -197,7 +197,7 @@ void transformation(void)
 /*________  Modification temperature  ____________________________________*/
 double g(void)
 {
-#if 1
+#if DECROISSEMENT_TEMP
 	return T * alpha; /* On decroit la temperature en utilisant T * alpha */
 #else
 	return T - alpha; /* On decroit la temperature en utilisant T - alpha */
