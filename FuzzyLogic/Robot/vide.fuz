@@ -9,14 +9,26 @@ configuration
 
 linguistique
 {
- bidonI := triangle(-1.0,0.0,1.0);
- bidonS := triangle(-1.0,0.0,1.0);
+	// Valeurs linguistiques de la variable linguistique DistGoal
+
+	// Valeurs linguistiques de la variable linguistique DirecGoal
+        onRight := rampe_bas(-90.0,0);
+        inFront := triangle(-90.0,0.0,90.0);
+        onLeft  := rampe_haut(0.0,90.0);
+
+        // Valeurs linguistiques de la variable linguistique Slin
+
+        // Valeurs linguistiques de la variable linguistique Sang
+        turnRight  := triangle(-200.0,-100.0,0.0);
+        straightOn := triangle(-100.0,0,100.0);
+        turnLeft   := triangle(0.0,100.0,200.0);
 }
 
 regles
 {
  si DirecGoal est inFront alors Sang est straightOn;
- si DirecGoal est onLeft alors Sang est turnLeft
- si DirecGoal est onRight alors Sang est turnRight
+ si DirecGoal est onLeft alors Sang est turnLeft;
+ si DirecGoal est onRight alors Sang est turnRight;
+
 
 }
