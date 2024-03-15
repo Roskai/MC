@@ -44,22 +44,79 @@ NB_REP_MAX=5000
 # Decroissement de la temperature :
 # 	- 0 : T - alpha 
 # 	- 1 : T * alpha
-DECROISSEMENT_TEMP=1
+DECROISSEMENT_TEMP=0
 NBVILLES=30
 
-set_param
+rm -f res.csv
+touch res.csv
+echo "\"nb_villes\",\"meth_decroiss_temp\",\"amplitude\",\"temp_init\",\"temp_finale\",\"nb_rep_max\",\"alpha\",\"resultat\"" >> res.csv
 
 make
+do_make=false
 
-echo "Pour les paramètres :"
-echo "    TEMPERATUREINITIALE=$TEMPERATUREINITIALE"
-echo "    TEMPERATUREFINALE=$TEMPERATUREFINALE"
-echo "    ALPHA=$ALPHA"
-echo "    AMPLITUDE=$AMPLITUDE"
-echo "    NB_REP_MAX=$NB_REP_MAX"
-echo "    NBVILLES=$NBVILLES"
-echo "    DECROISSEMENT_TEMP=$DECROISSEMENT_TEMP"
-echo "Résultat :"
-echo "    $(moyenne 20)"
+for NBVILLES in 30 100
+do
+	for DECROISSEMENT_TEMP in 0 1
+	do
+		do_make=true
+		for AMPLITUDE in 1 3 5 10
+		do
+			for temperature_tries in 1 2 3 4 5
+			do
+				case $temperature_tries in
+					1)
+						TEMPERATUREINITIALE=1000
+						TEMPERATUREFINALE=1
+						;;
+					2)
+						TEMPERATUREINITIALE=500
+						TEMPERATUREFINALE=1
+						;;
+					3)
+						TEMPERATUREINITIALE=100
+						TEMPERATUREFINALE=1
+						;;
+					4)
+						TEMPERATUREINITIALE=1000
+						TEMPERATUREFINALE=501
+						;;
+					5)
+						TEMPERATUREINITIALE=1000
+						TEMPERATUREFINALE=901
+						;;
+				esac
+				for NB_REP_MAX in 100 500 1000
+				do
+					if [ $DECROISSEMENT_TEMP -eq 1 ];
+					then
+						for ALPHA in 0.99 #0.30 0.70 0.90 0.99
+						do
+							set_param
+							if [ $do_make = true ];
+							then
+								make clean
+								make
+								do_make=false
+							fi
+							echo "$NBVILLES,$DECROISSEMENT_TEMP,$AMPLITUDE,$TEMPERATUREINITIALE,$TEMPERATUREFINALE,$NB_REP_MAX,$(echo "\"$ALPHA\"" | tr '.' ','),\"$(moyenne 5)\"" >> ./res.csv
+						done
+					else # Decroissement Temp : 1
+						for ALPHA in 1.453 #0.5 1 3 5
+						do
+							set_param
+							if [ $do_make = true ];
+							then
+								make clean
+								make
+								do_make=false
+							fi
+							echo "$NBVILLES,$DECROISSEMENT_TEMP,$AMPLITUDE,$TEMPERATUREINITIALE,$TEMPERATUREFINALE,$NB_REP_MAX,$(echo "\"$ALPHA\"" | tr '.' ','),\"$(moyenne 5)\"" >> ./res.csv
+						done
+					fi
+				done
+			done
+		done
+	done
+done
 
 make clean
