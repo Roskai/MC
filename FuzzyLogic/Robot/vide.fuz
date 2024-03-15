@@ -3,13 +3,15 @@ configuration
  et := min;   
  ou := max;   
  decodage:=centre;
- implication:=larsen
+ implication:=larsen;
  ainsi_que:=max;
 }
 
 linguistique
 {
 	// Valeurs linguistiques de la variable linguistique DistGoal
+        proche := rampe_bas(25,250);
+        loin := rampe_haut(25,250);
 
 	// Valeurs linguistiques de la variable linguistique DirecGoal
         onRight := rampe_bas(-90.0,0);
@@ -17,6 +19,9 @@ linguistique
         onLeft  := rampe_haut(0.0,90.0);
 
         // Valeurs linguistiques de la variable linguistique Slin
+        rapide := trapeze(0,50,150,501);
+        arrete := triangle(-50,0,50);
+        arriere := trapeze(-151,-150,-50,0);
 
         // Valeurs linguistiques de la variable linguistique Sang
         turnRight  := triangle(-200.0,-100.0,0.0);
@@ -26,9 +31,16 @@ linguistique
 
 regles
 {
+ si ObstFront est loin alors Slin est rapide;
+ si ObstFront est proche ou ObstRight est tres proche ou ObstLeft est tres proche alors Slin est arriere;
+
+ si ObstFront est proche et ObstRight est loin et ObstLeft est proche alors Sang est turnRight;
+ si ObstFront est proche et ObstLeft est loin et ObstRight est proche alors Sang est turnLeft;
+
+ si ObstLeft est proche alors Sang est turnRight;
+ si ObstRight est proche alors Sang est turnLeft;
+
  si DirecGoal est inFront alors Sang est straightOn;
- si DirecGoal est onLeft alors Sang est turnLeft;
- si DirecGoal est onRight alors Sang est turnRight;
-
-
+ si DirecGoal est onLeft et ObstLeft est loin alors Sang est turnLeft;
+ si DirecGoal est onRight et ObstRight est loin alors Sang est turnRight;
 }
