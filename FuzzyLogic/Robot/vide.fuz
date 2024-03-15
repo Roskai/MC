@@ -10,13 +10,12 @@ configuration
 linguistique
 {
 	// Valeurs linguistiques de la variable linguistique DistGoal
-	contact := rampe_bas(0,20);
-	proche := triangle(0,20,80);
-	loin := rampe_haut(20,80);
+	proche := rampe_bas(130,200);
+	loin := rampe_haut(130,200);
 
-	aBonneDistance := triangle(20,50,80)
+	aBonneDistance := triangle(20,50,80);
 	tropProche := rampe_bas(20,50);
-	tropLoin := rampe_haut(50,80);
+	tresLoin := rampe_haut(50,80);
 
 	// Valeurs linguistiques de la variable linguistique DirecGoal
 	aDroite := rampe_bas(-90.0,0);
@@ -26,29 +25,46 @@ linguistique
 	// Valeurs linguistiques de la variable linguistique Slin
 	enMarcheAvant := triangle(0,150,300);
 	aLArret := triangle(-150,0,150);
-	enMarcheArriere := triangle(-300,-150,-0);
+	enMarcheArriere := triangle(-300,-150,0);
+
+	//completementALArret := triangle(-35,0,35);
+	completementALArret := triangle(-60,0,60);
 
 	// Valeurs linguistiques de la variable linguistique Sang
-	tourneADroite := triangle(-200.0,-100.0,0.0);
-	toutDroit := triangle(-100.0,0,100.0);
-	tourneAGauche := triangle(0.0,100.0,200.0);
+	tourneADroite := triangle(-100.0,-50.0,0.0);
+	toutDroit := triangle(-50.0,0,50.0);
+	tourneAGauche := triangle(0.0,50.0,100.0);
+
+	tourneLegerementADroite := triangle(-50.0,-25.0,0.0);
 }
 
 regles
 {
 	// Vitesse
-	si ObstFront est loin et ObstBack est loin alors Slin est enMarcheAvant;
-	si ObstFront est loin et ObstBack est proche alors Slin est enMarcheAvant; 
-	si ObstFront est proche et ObstBack est loin alors Slin est enMarcheArriere;
+	si ObstFront est loin alors Slin est enMarcheAvant;  // 01
+	si InSlin est pas completementALArret et ObstFront est proche et ObstBack est loin alors Slin est enMarcheArriere; // 02
+	si InSlin est pas completementALArret et ObstFront est proche et ObstBack est proche et InSlin est enMarcheAvant alors Slin est enMarcheArriere; // 03
+	si InSlin est pas completementALArret et ObstFront est proche et ObstBack est proche et InSlin est enMarcheArriere alors Slin est enMarcheAvant; // 04
 
 	// Direction
-	si ObstRight est aBonneDistance et DirecGoal est aDroite alors Sang est toutDroit;
-	si ObstLeft est aBonneDistance et DirecGoal est aGauche alors Sang est toutDroit;
-	si ObstRight est tropLoin et DirecGoal est aDroite alors Sang est tourneADroite;
-	si ObstLeft est tropLoin et DirecGoal est aGauche alors Sang est tourneAGauche;
-	si ObstRight est tropProche et DirecGoal est aDroite alors Sang est tourneAGauche;
-	si ObstLeft est tropProche et DirecGoal est aGauche alors Sang est tourneADroite;
+	si InSlin est pas completementALArret et ObstRight est aBonneDistance et DirecGoal est aDroite et InSang est toutDroit alors Sang est toutDroit; // 05
+	si InSlin est pas completementALArret et ObstRight est aBonneDistance et DirecGoal est aDroite et InSang est tourneADroite alors Sang est tourneAGauche; // 06
+	si InSlin est pas completementALArret et ObstRight est aBonneDistance et DirecGoal est aDroite et InSang est tourneAGauche alors Sang est tourneADroite; // 07
+	si InSlin est pas completementALArret et ObstLeft est aBonneDistance et DirecGoal est aGauche et InSang est toutDroit alors Sang est toutDroit; // 08
+	si InSlin est pas completementALArret et ObstLeft est aBonneDistance et DirecGoal est aGauche et InSang est tourneADroite alors Sang est tourneAGauche; // 09
+	si InSlin est pas completementALArret et ObstLeft est aBonneDistance et DirecGoal est aGauche et InSang est tourneAGauche alors Sang est tourneADroite; // 10
+	si InSlin est pas completementALArret et ObstRight est tresLoin et DirecGoal est aDroite alors Sang est tourneADroite; // 11
+	si InSlin est pas completementALArret et ObstLeft est tresLoin et DirecGoal est aGauche alors Sang est tourneAGauche; // 12
+	si InSlin est pas completementALArret et ObstRight est tropProche et DirecGoal est aDroite alors Sang est tourneAGauche; // 13
+	si InSlin est pas completementALArret et ObstLeft est tropProche et DirecGoal est aGauche alors Sang est tourneADroite; // 14
 
 	// Blocage
-	si Slin est aLArret et Sang est toutDroit alors Sang est tourneADroite;
+
+	si InSlin est completementALArret et ObstFront est proche et ObstLeft est loin et ObstRight est loin ou ObstLeft est proche et ObstRight est proche alors Sang est tourneADroite; // 15
+	si InSlin est completementALArret et ObstFront est proche et ObstLeft est loin et ObstRight est proche alors Sang est tourneAGauche; // 16
+	si InSlin est completementALArret et ObstFront est proche et ObstLeft est proche et ObstRight est loin alors Sang est tourneADroite; // 17
+
+	// Securite
+	si InSang est tourneAGauche ou InSang est tourneADroite alors Slin est aLArret; // 18
+
 }
