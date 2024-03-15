@@ -1,46 +1,54 @@
 configuration
 {
- et := min;   
- ou := max;   
- decodage:=centre;
- implication:=larsen;
- ainsi_que:=max;
+	et := min;   
+	ou := max;   
+	decodage := centre;
+	implication := larsen;
+	ainsi_que := max;
 }
 
 linguistique
 {
 	// Valeurs linguistiques de la variable linguistique DistGoal
-        proche := rampe_bas(25,250);
-        loin := rampe_haut(25,250);
+	contact := rampe_bas(0,20);
+	proche := triangle(0,20,80);
+	loin := rampe_haut(20,80);
+
+	aBonneDistance := triangle(20,50,80)
+	tropProche := rampe_bas(20,50);
+	tropLoin := rampe_haut(50,80);
 
 	// Valeurs linguistiques de la variable linguistique DirecGoal
-        onRight := rampe_bas(-90.0,0);
-        inFront := triangle(-90.0,0.0,90.0);
-        onLeft  := rampe_haut(0.0,90.0);
+	aDroite := rampe_bas(-90.0,0);
+	devant := triangle(-90.0,0.0,90.0);
+	aGauche := rampe_haut(0.0,90.0);
 
-        // Valeurs linguistiques de la variable linguistique Slin
-        rapide := trapeze(0,50,150,501);
-        arrete := triangle(-50,0,50);
-        arriere := trapeze(-151,-150,-50,0);
+	// Valeurs linguistiques de la variable linguistique Slin
+	enMarcheAvant := triangle(0,150,300);
+	aLArret := triangle(-150,0,150);
+	enMarcheArriere := triangle(-300,-150,-0);
 
-        // Valeurs linguistiques de la variable linguistique Sang
-        turnRight  := triangle(-200.0,-100.0,0.0);
-        straightOn := triangle(-100.0,0,100.0);
-        turnLeft   := triangle(0.0,100.0,200.0);
+	// Valeurs linguistiques de la variable linguistique Sang
+	tourneADroite := triangle(-200.0,-100.0,0.0);
+	toutDroit := triangle(-100.0,0,100.0);
+	tourneAGauche := triangle(0.0,100.0,200.0);
 }
 
 regles
 {
- si ObstFront est loin alors Slin est rapide;
- si ObstFront est proche ou ObstRight est tres proche ou ObstLeft est tres proche alors Slin est arriere;
+	// Vitesse
+	si ObstFront est loin et ObstBack est loin alors Slin est enMarcheAvant;
+	si ObstFront est loin et ObstBack est proche alors Slin est enMarcheAvant; 
+	si ObstFront est proche et ObstBack est loin alors Slin est enMarcheArriere;
 
- si ObstFront est proche et ObstRight est loin et ObstLeft est proche alors Sang est turnRight;
- si ObstFront est proche et ObstLeft est loin et ObstRight est proche alors Sang est turnLeft;
+	// Direction
+	si ObstRight est aBonneDistance et DirecGoal est aDroite alors Sang est toutDroit;
+	si ObstLeft est aBonneDistance et DirecGoal est aGauche alors Sang est toutDroit;
+	si ObstRight est tropLoin et DirecGoal est aDroite alors Sang est tourneADroite;
+	si ObstLeft est tropLoin et DirecGoal est aGauche alors Sang est tourneAGauche;
+	si ObstRight est tropProche et DirecGoal est aDroite alors Sang est tourneAGauche;
+	si ObstLeft est tropProche et DirecGoal est aGauche alors Sang est tourneADroite;
 
- si ObstLeft est proche alors Sang est turnRight;
- si ObstRight est proche alors Sang est turnLeft;
-
- si DirecGoal est inFront alors Sang est straightOn;
- si DirecGoal est onLeft et ObstLeft est loin alors Sang est turnLeft;
- si DirecGoal est onRight et ObstRight est loin alors Sang est turnRight;
+	// Blocage
+	si Slin est aLArret et Sang est toutDroit alors Sang est tourneADroite;
 }
