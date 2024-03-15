@@ -1,7 +1,10 @@
 configuration
 {
- et := min;   // Pourquoi pas, c'est bidon...
- ou := max;   // Pourquoi pas, c'est bidon...
+ et := min;   
+ ou := max;   
+ decodage:=centre;
+ implication:=larsen
+ ainsi_que:=max;
 }
 
 linguistique
@@ -12,5 +15,8 @@ linguistique
 
 regles
 {
- si InSlin est bidonI alors Slin est bidonS;
+ si DirecGoal est inFront alors Sang est straightOn;
+ si DirecGoal est onLeft alors Sang est turnLeft
+ si DirecGoal est onRight alors Sang est turnRight
+
 }
