@@ -7,4 +7,12 @@ Le problème auquel on s’interesse est celui du pilotage d’un robot mobile d
 ## Méthode adopté
 
 Nous avons adopté une methode incrémental. Nous avons commencer par faire fonctionner le robot dans la map vide, pour nous assurer que le robot arrive a ce déplacer dans un environnement.
-Puis nous avons ajouter des règle pour gérer des obstacles simple comme dans la map1. Une fois que nous avons
+Puis nous avons ajouter des règle pour gérer des obstacles simple comme dans la map1. Une fois que nous avons le robot qui arrive à contourner un obstacle simple, nous allons pouvoir passer avec plus d'obstacle avec la map3.
+
+## Resultat
+
+Nous avons un robot qui arrive a ce déplacer dans un labyrinthe de façon flou. Sous certaine condition il entre en colision avec un mur.
+
+## Difficulté rencontré
+
+## point de blocage
