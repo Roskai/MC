@@ -11,8 +11,10 @@ Puis nous avons ajouter des règle pour gérer des obstacles simple comme dans l
 
 ## Resultat
 
-Nous avons un robot qui arrive a ce déplacer dans un labyrinthe de façon flou. Sous certaine condition il entre en colision avec un mur.
+Nous avons un robot qui arrive a ce déplacer dans un labyrinthe de façon flou. Sous certaine condition il entre en colision avec un mur. Lorsque le robot est coincé il applique la technique du "Balancement". Il il se balance de droite a gauche avec un angle de plus en plus agrand jusqu'à trouvé une voix qui lui permette de sortir. Il se balance jusqu'a qu'il trouve une règle permettant de pouvoir continuer la recherche du but.
 
 ## Difficulté rencontré
 
-## point de blocage
+Le fait de pouvoir contourner des obstacles et le fait de pouvoir soritr d'un cuvette ont fait partie des difficulté rencontrée.
+
+## Point de blocage
