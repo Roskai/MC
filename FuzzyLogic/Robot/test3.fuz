@@ -49,7 +49,7 @@ regles
 	si ObstRight est proche ou ObstLeft est proche alors Slin est aLArret;
 	si ObstFront est pas tropProche alors Slin est enMarcheAvant;
 	si ObstFront est tresProche et InSlin est enMarcheAvant alors Slin est enMarcheArriere;
-	si ObstBack est tresProche et InSlin est enMarcheArriere alors Slin est enMarcheAvant;
+	si ObstBack  est tresProche et InSlin est enMarcheArriere alors Slin est enMarcheAvant;
 
 	// Direction
 	si ObstFront est loin et ObstRight est loin et DirecGoal est derriereADroite alors Sang est tourneExtremementADroite et Slin est enMarcheArriere;
@@ -82,7 +82,5 @@ regles
 		ObstRight est pas proche et ObstLeft est pas proche et
 		InSang est versDroite et 
 		DirecGoal est coteDroite alors Sang est tourneExtremementADroite;
-
-	// Securite
 
 }
