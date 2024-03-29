@@ -56,12 +56,32 @@ Le cœur de notre dispositif de contrôle repose sur une série de règles floue
 
 Ces règles illustrent comment la logique floue permet au robot de naviguer de manière adaptative et intelligente dans un environnement rempli d'incertitudes, en prenant des décisions basées sur une interprétation nuancée des données sensorielles. Cette méthodologie offre au robot les outils nécessaires pour ajuster sa trajectoire de manière dynamique, garantissant une navigation
 
-## Resultat
+## Résultats et Analyse
 
-Nous avons un robot qui arrive a ce déplacer dans un labyrinthe de façon flou. Sous certaine condition il entre en colision avec un mur. Lorsque le robot est coincé il applique la technique du "Balancement". Il il se balance de droite a gauche avec un angle de plus en plus agrand jusqu'à trouvé une voix qui lui permette de sortir. Il se balance jusqu'a qu'il trouve une règle permettant de pouvoir continuer la recherche du but.
+Après l'implémentation des règles de logique floue et la définition précise des variables linguistiques pour le pilotage du robot mobile, nous avons procédé à une série de tests dans divers environnements simulés. Ces tests visaient à évaluer l'efficacité de notre système de contrôle flou dans des scénarios variés, allant d'espaces ouverts simples à des labyrinthes complexes avec de multiples obstacles. Voici une synthèse des résultats obtenus, illustrant la performance du robot dans ces différents contextes.
 
-## Difficulté rencontré
+### Environnement Simple (Map0 et Map1)
 
-Le fait de pouvoir contourner des obstacles et le fait de pouvoir soritr d'un cuvette ont fait partie des difficulté rencontrée.
+Dans les environnements les plus simples, sans obstacle ou avec un seul obstacle, le robot a démontré une excellente capacité à naviguer vers ses objectifs. La logique floue a permis une adaptation fluide à l'environnement, avec des ajustements précis de la vitesse et de la direction en fonction de la position relative de l'objectif. Le robot a systématiquement atteint ses cibles sans aucune collision, validant l'efficacité des règles de base de la logique floue dans des conditions optimales.
 
-## Point de blocage
+### Environnement Moyennement Complexe (Map2)
+
+L'introduction d'un nombre modéré d'obstacles a mis en évidence la robustesse du système de navigation flou. Le robot a réussi à contourner efficacement les obstacles tout en maintenant sa trajectoire vers l'objectif. Cependant, nous avons observé une légère augmentation du temps nécessaire pour atteindre l'objectif, en raison des détours nécessaires. Cette observation souligne l'importance de l'équilibrage entre l'évitement d'obstacles et l'optimisation du chemin.
+
+### Environnement Complexe (Map3)
+
+Dans les scénarios les plus complexes, comportant plusieurs obstacles placés de manière stratégique, le robot a pu démontrer toute la flexibilité et l'adaptabilité de la logique floue. Malgré quelques hésitations initiales dans des situations de proximité élevée avec plusieurs obstacles, le robot a utilisé la technique du balancement pour trouver des passages viables, évitant ainsi les impasses et progressant vers ses objectifs. Ces tests ont révélé les limites de notre système dans des environnements extrêmement denses, mais ont également souligné sa capacité à gérer des situations délicates grâce à une stratégie d'évitement dynamique.
+
+## Discussion
+
+L'analyse des résultats met en lumière plusieurs points clés :
+
+- **Adaptabilité** : Le système de contrôle flou a prouvé son adaptabilité à différents environnements, en ajustant dynamiquement la navigation du robot en fonction des obstacles rencontrés.
+
+- **Précision des Variables Linguistiques** : L'efficacité de la navigation floue dépend fortement de la précision avec laquelle les variables linguistiques sont définies. Une calibration attentive est cruciale pour la performance globale du système.
+
+- **Potentiel d'Optimisation** : Bien que le système ait performé de manière satisfaisante, les résultats suggèrent un potentiel d'optimisation, en particulier pour les environnements complexes. L'intégration de techniques d'apprentissage automatique pour ajuster les règles floues pourrait offrir une voie d'amélioration significative.
+
+## Conclusion
+
+Les résultats obtenus à travers ces tests confirment l'efficacité de l'approche de logique floue dans la navigation autonome d'un robot mobile. Bien que des défis demeurent dans la gestion des environnements hautement complexes, les fondements établis par ce système de contrôle offrent une base solide pour de futures améliorations et adaptations. Les prochaines étapes incluront l'affinement des règles floues et l'exploration de stratégies d'apprentissage pour optimiser davantage la navigation dans des environnements variés.
