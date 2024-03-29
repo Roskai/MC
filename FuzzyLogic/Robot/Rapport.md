@@ -17,6 +17,7 @@ Pour aborder ce problème complexe, une méthodologie incrémentale a été choi
 3. **Navigation dans des Environnements Complexes** : Finalement, le robot est mis à l'épreuve dans des scénarios de plus en plus complexes (map3), où il doit démontrer sa capacité à intégrer dynamiquement les informations sensorielles pour planifier et ajuster son trajet vers des cibles tout en naviguant autour d'une variété d'obstacles.
 
 ## **Règle et valeurs linguistiques**
+
 Dans ce chapitre, nous explorons avec précision le système de règles basé sur la logique floue conçu pour piloter un robot mobile à travers un environnement non cartographié. Ce système s'appuie sur des variables linguistiques pour interpréter les signaux sensoriels et les états du robot en des termes intuitivement compréhensibles, permettant de définir des comportements complexes via un ensemble cohérent de règles floues.
 
 ### Définition des Variables et Valeurs Linguistiques
@@ -79,6 +80,7 @@ L'introduction d'un nombre modéré d'obstacles a mis en évidence la robustesse
 Dans les scénarios les plus complexes, comportant plusieurs obstacles placés de manière stratégique, le robot a pu démontrer toute la flexibilité et l'adaptabilité de la logique floue. Malgré quelques hésitations initiales dans des situations de proximité élevée avec plusieurs obstacles, le robot a utilisé la technique du balancement pour trouver des passages viables, évitant ainsi les impasses et progressant vers ses objectifs. Ces tests ont révélé les limites de notre système dans des environnements extrêmement denses, mais ont également souligné sa capacité à gérer des situations délicates grâce à une stratégie d'évitement dynamique.
 
 ### ***Analyse des problèmes***
+
 Ces analyses sur les différentes cartes ont misent en évidence un problème, déjà cité plus haut : lorsqu'un obstacle se situe dans un des angles morts avant du robot, et que ce dernier avance en tournant (même lentement ou à l'arrêt), le robot s'écrasera contre cet obstacle. A l'arrêt, ce la peut s'expliquer par le fait que le robot ne soit pas carré ou circulaire, mais rectangle, ce qui créer un porte-à-faux au niveau de ces angles (car son centre de rotation est au centre).
 
 ## **Conclusion**
