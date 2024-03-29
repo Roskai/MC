@@ -1,8 +1,5 @@
 # **Logique Flou**
 
-Pour développer et enrichir ces deux parties du rapport, commençons par approfondir le contexte du problème avant de détailler la méthode adoptée.
-Pour rédiger les sections améliorées du rapport sur le travail pratique (TP) qui implique l'utilisation de la logique floue pour contrôler le comportement réactif d'un robot mobile dans un environnement inconnu, voici une version détaillée et enrichie :
-
 ## **Problème Posé**
 
 Au cœur de ce TP réside le défi de piloter un robot mobile à travers un espace confiné de 20 mètres de côté, semé d'obstacles divers. L'objectif du robot est de localiser et de rejoindre une cible disposée de manière aléatoire, tout en naviguant habilement pour éviter les obstacles présents. La complexité de cette tâche est exacerbée par le fait que le robot doit s'appuyer sur une perception locale et limitée de son environnement, n'ayant pour seules information que la distance à l'obstacle le plus proche à gauche, droite, devant, et derrière, la distance et la direction de l'objectif, sa vitesse et son angle.
