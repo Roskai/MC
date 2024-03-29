@@ -1,41 +1,25 @@
 # Logique Flou
 
 Pour développer et enrichir ces deux parties du rapport, commençons par approfondir le contexte du problème avant de détailler la méthode adoptée.
+Pour rédiger les sections améliorées du rapport sur le travail pratique (TP) qui implique l'utilisation de la logique floue pour contrôler le comportement réactif d'un robot mobile dans un environnement inconnu, voici une version détaillée et enrichie :
 
-## Problème Approfondi
+## Problème Posé
 
-Le pilotage autonome d'un robot mobile dans un environnement inconnu représente un défi significatif en robotique. L'objectif principal de ce projet est de développer un système permettant à un robot de naviguer de manière autonome, en identifiant et en rejoignant des cibles définies aléatoirement, tout en évitant les obstacles qui se présentent sur son chemin. Cette tâche implique plusieurs sous-problèmes complexes :
+Au cœur de ce TP réside le défi de piloter un robot mobile à travers un espace confiné de 20 mètres de côté, semé d'obstacles divers. L'objectif du robot est de localiser et de rejoindre plusieurs cibles disposées de manière aléatoire, tout en naviguant habilement pour éviter les obstacles présents. La complexité de cette tâche est exacerbée par le fait que le robot doit s'appuyer sur une perception locale et limitée de son environnement.
 
-- **Perception de l'environnement** : Le robot doit être capable de percevoir son environnement avec précision. Cela inclut la détection d'obstacles, la reconnaissance de l'espace navigable, et l'identification des cibles. La perception doit être effective même dans des environnements non structurés ou dynamiques, où les obstacles et les cibles peuvent changer de position ou apparaître soudainement.
+## Méthode Adoptée
 
-- **Planification de chemin** : Après avoir perçu son environnement, le robot doit planifier un chemin pour atteindre ses cibles tout en évitant les obstacles. Cette planification doit être dynamique, s'adaptant en temps réel aux changements perçus dans l'environnement.
+Pour aborder ce problème complexe, une méthodologie incrémentale a été choisie, favorisant une approche étape par étape pour développer et affiner les capacités de navigation du robot. Cette approche méthodique permet une compréhension approfondie des principes de la logique floue appliquée à la robotique mobile et offre une opportunité de tester et d'ajuster les règles floues dans des scénarios de complexité croissante.
 
-- **Exécution et adaptation** : Le robot doit ensuite exécuter le chemin planifié. Pendant l'exécution, il doit continuellement adapter sa trajectoire en réponse à de nouvelles informations sensorielles, corrigeant tout écart par rapport au chemin prévu et répondant efficacement aux imprévus.
+### Étapes de Développement
 
-## Méthode Adoptée Développée
+1. **Validation des Fonctionnalités de Base** : La première phase se concentre sur la confirmation des capacités motrices et de navigation de base du robot dans un environnement vierge. Cela comprend des tests de déplacement et d'orientation assurant ainsi que le robot est apte à entreprendre des tâches de navigation plus complexes.
 
-Pour aborder ce problème, une approche méthodologique incrémentale a été choisie, permettant une validation progressive des solutions développées et une adaptation flexible aux défis rencontrés.
+2. **Introduction et Gestion des Obstacles Simples** : Avec les capacités de base validées, le projet passe à l'introduction d'obstacles simples dans l'environnement (map1). Cette étape vise à développer et tester des mécanismes de perception et d'évitement d'obstacles, utilisant des règles floues pour naviguer efficacement autour des obstacles sans assistance.
 
-### Phase 1 : Navigation dans un Environnement Vide
-
-La première étape a consisté à tester la capacité du robot à se déplacer dans un environnement complètement vide. Cette phase initiale avait pour but de vérifier l'efficacité de nos règles de base pour la navigation et la détection de direction.
-
-### Phase 2 : Gestion des Obstacles Simples
-
-Après avoir confirmé que le robot pouvait naviguer efficacement dans un espace vide, l'étape suivante a introduit des obstacles simples dans l'environnement (map1). Cette phase visait à :
-
-- **Développer et Tester la Perception des Obstacles** : Intégrer et affiner les capacités de perception sensorielle du robot pour détecter et identifier correctement les obstacles simples.
-- **Implémenter la Stratégie d'Évitement** : Développer et tester des stratégies d'évitement d'obstacles, en utilisant la logique floue pour permettre au robot de prendre des décisions de navigation en temps réel basées sur les données sensorielles.
-
-### Phase 3 : Navigation dans des Environnements Complexes
-
-La finalité de cette approche incrémentale est de préparer le robot à opérer dans des environnements de plus en plus complexes, avec de multiples obstacles (map3). Cette phase inclut :
-
-- **Complexification de l'Environnement** : Introduire une variété d'obstacles et de configurations spatiales pour tester la robustesse des stratégies d'évitement et de navigation du robot.
-- **Optimisation de la Planification de Chemin** : Améliorer les algorithmes de planification de chemin pour optimiser l'efficacité du parcours, en tenant compte de la dynamique de l'environnement et de la position aléatoire des cibles.
-- **Adaptation et Apprentissage** : Permettre au robot d'apprendre de son environnement et de ses expériences passées pour améliorer continuellement ses capacités de navigation et d'évitement d'obstacles.
-
-En suivant cette méthodologie incrémentale, le projet vise à construire progressivement un système de navigation autonome robuste et adaptable, capable de relever les défis posés par des environnements inconnus et en constante évolution.
+3. **Navigation dans des Environnements Complexes** : Finalement, le robot est mis à l'épreuve dans des scénarios de plus en plus complexes (map3), où il doit démontrer sa capacité à intégrer dynamiquement les informations sensorielles pour planifier et ajuster son trajet vers des cibles tout en naviguant autour d'une variété d'obstacles.
+  
+4. **Méthode du balancement** : Lorsque le robot détecte qu'il est face à un obstacle et qu'un mouvement en avant direct n'est plus possible, il commence à tourner alternativement à droite et à gauche, augmentant progressivement l'angle de rotation à chaque oscillation. Ce processus continue jusqu'à ce que le robot identifie une voie libre lui permettant de contourner l'obstacle et de reprendre sa progression. Le balancement permet ainsi au robot de sonder l'environnement proche pour des chemins alternatifs, offrant une solution simple mais efficace pour surmonter les blocages sans nécessiter un recalcul complet du trajet.
 
 ##  Règle et valeurs linguistiques
 
