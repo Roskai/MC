@@ -9,14 +9,10 @@ configuration
 
 linguistique
 {
-	// Valeurs linguistiques de la variable linguistique DistGoal
 	tropProche := rampe_bas(20,75);
 	tresProche := rampe_bas(130,200);
 	proche := rampe_bas(0,100);
-	loin := rampe_haut(130,200);
-	//tresLoin := rampe_haut(200,2000);
 
-	// Valeurs linguistiques de la variable linguistique DirecGoal
 	derriereADroite := rampe_bas(-135,-45);
 	aDroite := triangle(-135,-45,0);
 	devant := triangle(-45,0,45);
@@ -26,12 +22,10 @@ linguistique
 	coteDroite := rampe_bas(-0.01,0);
 	coteGauche := rampe_haut(0,0.01);
 
-	// Valeurs linguistiques de la variable linguistique Slin
 	enMarcheAvant := triangle(0,150,300);
 	aLArret := triangle(-150,0,150);
 	enMarcheArriere := triangle(-300,-150,0);
 
-	// Valeurs linguistiques de la variable linguistique Sang
 	tourneExtremementADroite := triangle(-150,-100,-50);
 	tourneADroite := trapeze(-100,-50,-15,0);
 	toutDroit := triangle(-15,0,15);
@@ -45,38 +39,54 @@ linguistique
 regles
 {
 	// Vitesse
+	/// R1
 	si ObstFront est loin alors Slin est enMarcheAvant;
+	/// R2
 	si ObstRight est proche ou ObstLeft est proche alors Slin est aLArret;
+	/// R3
 	si ObstFront est pas tropProche alors Slin est enMarcheAvant;
+	/// R4
 	si ObstFront est tresProche et InSlin est enMarcheAvant alors Slin est enMarcheArriere;
+	/// R5
 	si ObstBack  est tresProche et InSlin est enMarcheArriere alors Slin est enMarcheAvant;
 
 	// Direction
+	/// R6
 	si ObstFront est loin et ObstRight est loin et DirecGoal est derriereADroite alors Sang est tourneExtremementADroite;
+	/// R7
 	si ObstFront est loin et ObstRight est loin et DirecGoal est coteDroite alors Sang est tourneADroite;
+	/// R8
 	si ObstFront est loin et ObstRight est loin et ObstLeft est loin et DirecGoal est devant alors Sang est toutDroit;
+	/// R9
 	si ObstFront est loin et ObstLeft est loin et DirecGoal est aGauche alors Sang est tourneAGauche;
+	/// R10
 	si ObstFront est loin et ObstLeft est loin et DirecGoal est derriereAGauche alors Sang est tourneExtremementAGauche;
 
 	// Blocage
+	/// R11
 	si InSlin est aLArret et ObstFront est tresProche et 
 		ObstRight est proche alors Sang est tourneAGauche;
+	/// R12
 	si InSlin est aLArret et ObstFront est tresProche et 
 		ObstLeft est proche alors Sang est tourneADroite;
 
+	/// R13
 	si InSlin est aLArret et ObstFront est tropProche et 
 		ObstRight est pas proche et ObstLeft est pas proche et
 		InSang est pas versDroite et
 		DirecGoal est coteGauche alors Sang est tourneAGauche;
+	/// R14
 	si InSlin est aLArret et ObstFront est tropProche et 
 		ObstRight est pas proche et ObstLeft est pas proche et
 		InSang est pas versGauche et
 		DirecGoal est coteDroite alors Sang est tourneADroite;
 
+	/// R15
 	si InSlin est aLArret et ObstFront est tropProche et 
 		ObstRight est pas proche et ObstLeft est pas proche et
 		InSang est versGauche et
 		DirecGoal est coteGauche alors Sang est tourneExtremementAGauche;
+	/// R16
 	si InSlin est aLArret et ObstFront est tropProche et 
 		ObstRight est pas proche et ObstLeft est pas proche et
 		InSang est versDroite et 
@@ -84,7 +94,8 @@ regles
 
 	
 	// Contrainte
+	/// R17
 	si InSang est pas toutDroit et InSlin est enMarcheAvant alors Slin est enMarcheArriere;
+	/// R18
 	si InSang est pas toutDroit et InSlin est enMarcheArriere alors Slin est enMarcheAvant;
-
 }
