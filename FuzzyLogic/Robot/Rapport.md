@@ -22,38 +22,39 @@ Pour aborder ce problème complexe, une méthodologie incrémentale a été choi
 4. **Méthode du balancement** : Lorsque le robot détecte qu'il est face à un obstacle et qu'un mouvement en avant direct n'est plus possible, il commence à tourner alternativement à droite et à gauche, augmentant progressivement l'angle de rotation à chaque oscillation. Ce processus continue jusqu'à ce que le robot identifie une voie libre lui permettant de contourner l'obstacle et de reprendre sa progression. Le balancement permet ainsi au robot de sonder l'environnement proche pour des chemins alternatifs, offrant une solution simple mais efficace pour surmonter les blocages sans nécessiter un recalcul complet du trajet.
 
 ##  Règle et valeurs linguistiques
+Dans ce chapitre, nous explorons avec précision le système de règles basé sur la logique floue conçu pour piloter un robot mobile à travers un environnement non cartographié. Ce système s'appuie sur des variables linguistiques pour interpréter les signaux sensoriels et les états du robot en des termes intuitivement compréhensibles, permettant de définir des comportements complexes via un ensemble cohérent de règles floues.
 
-Dans ce chapitre, nous allons explorer en détail le système de règles de la logique floue mis en place pour piloter un robot mobile dans un environnement inconnu. Ce système utilise des variables linguistiques pour traduire les données sensorielles et les états du robot en termes compréhensibles, permettant ainsi de définir des comportements complexes à travers un ensemble de règles floues.
+### Définition des Variables et Valeurs Linguistiques
 
-### Définition des variables et valeurs linguistiques
+La construction de notre système de contrôle flou débute par l'établissement des variables linguistiques et de leurs valeurs associées. Ces variables traduisent les entrées — comme la distance et la direction par rapport à un objectif ou à un obstacle — et les sorties — telles que la vitesse de déplacement et l'orientation du robot — du système. Les variables linguistiques définies et leurs valeurs associées sont les suivantes :
 
-La première étape dans la conception de notre système de contrôle flou consiste à définir les variables linguistiques et leurs valeurs. Ces variables représentent les entrées (la distance et la direction par rapport à l'objectif ou un obstacle) et les sorties (la vitesse et la direction du robot) du système. Voici les variables linguistiques et leurs valeurs utilisées :
-
-- **DistGoal (Distance jusqu'à l'objectif)**
-  - `proche` : Une distance faible entre le robot et son objectif, définie par une rampe basse entre 30 et 80 cm.
-  - `aBonneDistance` : Une distance optimale pour le mouvement, définie par un triangle entre 30, 55, et 80 cm.
-  - `loin` : Une distance importante nécessitant potentiellement d'accélérer, définie par une rampe haute entre 30 et 80 cm.
-  - `doitFreiner` : Une distance critique où le robot doit ralentir ou s'arrêter, définie par une rampe basse entre 100 et 200 cm.
+- **DistGoal (Distance par rapport à l'objectif)**
+  - `tropProche` : Signifie que l'objectif est dangereusement proche, défini par une rampe descendant de 20 à 75 cm.
+  - `tresProche` : Indique une proximité immédiate de l'objectif, avec une rampe descendant de 130 à 200 cm.
+  - `proche` : Décrit une distance modérée à l'objectif, représentée par une rampe descendant de 0 à 100 cm.
+  - `loin` : Représente une distance considérable de l'objectif, illustrée par une rampe montante de 130 à 200 cm.
 
 - **DirecGoal (Direction de l'objectif)**
-  - `derriereADroite`, `aDroite`, `devant`, `aGauche`, `derriereAGauche` : Ces valeurs décrivent la position relative de l'objectif par rapport au robot, facilitant la décision de tourner à droite, à gauche, ou de continuer tout droit.
+  - `derriereADroite`, `aDroite`, `devant`, `aGauche`, `derriereAGauche` : Ces valeurs qualifient la position relative de l'objectif autour du robot, facilitant la prise de décision pour les manœuvres de rotation ou le maintien de la trajectoire.
 
-- **Slin (Vitesse linéaire) et Sang (Vitesse angulaire)**
-  - Ces variables contrôlent respectivement la vitesse à laquelle le robot avance ou recule, et la rapidité avec laquelle il tourne. Les valeurs vont de mouvements avant/arrière rapides à des ajustements plus fins, comme `enMarcheAvant`, `aLArret`, ou `tourneADroite`.
+- **Slin (Vitesse linéaire) & Sang (Vitesse angulaire)**
+  - Ces variables déterminent respectivement la rapidité avec laquelle le robot avance ou recule et la vitesse à laquelle il pivote. Les valeurs varient de mouvements avant ou arrière à des ajustements directionnels précis, tels que `enMarcheAvant` ou `tourneADroite`.
 
-### Règles de la logique floue
+### Règles de Logique Floue
 
-Le cœur de notre système de contrôle est un ensemble de règles floues qui décrivent comment le robot doit réagir en fonction de différentes situations. Ces règles utilisent les valeurs linguistiques des variables d'entrée pour déterminer les actions à effectuer (variables de sortie). Voici quelques exemples de règles :
+Le cœur de notre dispositif de contrôle repose sur une série de règles floues élaborées pour décrire la manière dont le robot doit réagir face à diverses configurations environnementales. Ces règles exploitent les valeurs linguistiques attribuées aux variables d'entrée pour influencer les comportements en sortie du système. Exemples de règles pertinentes :
 
-- **Gestion de la vitesse :**
-  - Si le robot est orienté vers son objectif (`toutDroit`) et qu'aucun obstacle ne requiert de freiner (`pas doitFreiner`), alors il peut avancer (`enMarcheAvant`).
-  - Si face à un obstacle nécessitant un freinage (`doitFreiner`) et si le robot avançait (`enMarcheAvant`), il passe en marche arrière (`enMarcheArriere`) pour éviter la collision.
+- **Contrôle de la Vitesse (Slin) :**
+  - En absence d'obstacle nécessitant un freinage (`ObstFront est loin`), le robot poursuit sa route (`Slin est enMarcheAvant`), promouvant une avancée fluide vers l'objectif.
+  - Face à un obstacle imposant un arrêt (`ObstFront est tresProche`) alors que le robot est en mouvement (`InSlin est enMarcheAvant`), une inversion de la marche est exécutée (`Slin est enMarcheArriere`) pour éviter une collision frontale.
 
-- **Ajustement de la direction :**
-  - Si le robot doit tourner extrêmement à droite pour atteindre son objectif derrière lui à droite (`derriereADroite`), la vitesse angulaire est ajustée pour un virage serré (`tourneExtremementADroite`).
+- **Ajustement Directionnel (Sang) :**
+  - Lorsque le robot nécessite un virage extrême à droite pour atteindre son objectif (`DerriereADroite`), la vitesse angulaire est adaptée pour réaliser cette manœuvre (`Sang est tourneExtremementADroite`).
 
-- **Gestion des blocages :**
-  - Lorsque le robot est à l'arrêt (`aLArret`) et bloqué par un obstacle sur le côté droit (`procheDeCote`), il doit tourner à gauche (`tourneAGauche`) pour se dégager.
+- **Stratégie en Cas de Blocage :**
+  - Si le robot est immobilisé (`aLArret`) par un obstacle proche sur le côté droit (`ObstRight est proche`), il pivote à gauche (`Sang est tourneAGauche`) pour dégager la voie.
+
+Ces règles illustrent comment la logique floue permet au robot de naviguer de manière adaptative et intelligente dans un environnement rempli d'incertitudes, en prenant des décisions basées sur une interprétation nuancée des données sensorielles. Cette méthodologie offre au robot les outils nécessaires pour ajuster sa trajectoire de manière dynamique, garantissant une navigation
 
 ## Resultat
 
